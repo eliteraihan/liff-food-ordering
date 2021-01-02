@@ -65,7 +65,6 @@ function initializeLiff(myLiffId) {
  */
 function initializeApp() {
     // pangil fungsi di sini
-    initHideAll();
     registerEventListeners();
 
     // check if the user is logged in OR logged out,
@@ -75,6 +74,7 @@ function initializeApp() {
         showLoggedinElements();
     } else {
         $(`#liff-logout`).hide();
+        showLoggedoutElements()
     }
 }
 
@@ -102,6 +102,9 @@ function showLoggedinElements() {
     else {
         $('#notInApp').show();
     }
+}
+function showLoggedoutElements() {
+    $(`#not-loggedin`).show();
 }
 
 function registerEventListeners() {
