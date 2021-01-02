@@ -64,6 +64,9 @@ function initializeLiff(myLiffId) {
  * Initialize the app by calling functions handling individual app components
  */
 function initializeApp() {
+    // hide semua dulu
+    initHideAll();
+
     // check if the user is logged in OR logged out,
     // and disable inappropriate button.
     if (liff.isLoggedIn()) {
@@ -76,7 +79,7 @@ function initializeApp() {
         showLoggedoutElements()
     }
 
-    // pangil fungsi di sini
+    // register terakhir
     registerEventListeners();
 }
 
