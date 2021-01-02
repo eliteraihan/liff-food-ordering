@@ -4,6 +4,7 @@ const harga_makanan = [5000, 7000, 9000];
 
 const nama_minuman = ["Minuman Segar", "Minuman Manis", "Minuman Hangat Manis"];
 const harga_minuman = [1000, 2000, 4000];
+// ... end of editable menu list.
 
 var global_i = 0;
 
@@ -225,27 +226,4 @@ function hideElementId(id, hide = true) {
 function konfirmasiPesanan(price) {
     alert(`Invoice order code [${(Date.now() % 2097152).toLocaleString()}]\n` + `Total [IDR ${price.toLocaleString()}]`);
     // tbd
-}
-
-// var x = 0;
-// var span = document.getElementById('value'); // find the <span> element in the DOM
-// var increment = document.getElementById('increment'); // find the element with the ID 'increment'
-// var decrement = document.getElementById('decrement'); // find the element with the ID 'decrement'
-
-increment.addEventListener('click', function () {
-    span.textContent = ++x;
-    cetakJumlah();
-});
-decrement.addEventListener('click', function () {
-    if (x > 0) {
-        span.textContent = --x;
-    }
-    cetakJumlah();
-});
-
-var jumlah = document.getElementById('jumlah');
-function cetakJumlah() {
-    a = parseInt(span.textContent, 10);
-    b = parseInt(span.textContent, 10);
-    jumlah.textContent = a + b;
 }
