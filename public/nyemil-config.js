@@ -172,7 +172,7 @@ function cekCetakRingkasan(id) {
     let total_harga = 0;
 
     if (isNonZero(makanan_id_qty) || isNonZero(minuman_id_qty)) {
-        hideRingkasan(false);
+        hideElementId(`ringkasan`, false);
         data_ringkasan += `<h4>Ringkasan</h4>`;
 
         for (id in makanan_id_index) {
@@ -201,7 +201,7 @@ function cekCetakRingkasan(id) {
         data_ringkasan += `</center>`;
     }
     else {
-        hideRingkasan(true);
+        hideElementId(`ringkasan`, true);
     }
 
     try {
@@ -212,13 +212,13 @@ function cekCetakRingkasan(id) {
     }
 }
 
-function hideRingkasan(hide = true) {
-    let ringkasan_element = document.getElementById(`ringkasan`);
-    if (hide == true && !ringkasan_element.classList.contains('hidden')) {
-        ringkasan_element.classList.add('hidden');
+function hideElementId(id, hide = true) {
+    let id_element = document.getElementById(id);
+    if (hide == true && !id_element.classList.contains('hidden')) {
+        id_element.classList.add('hidden');
     }
     else {
-        ringkasan_element.classList.remove('hidden');
+        id_element.classList.remove('hidden');
     }
 }
 
