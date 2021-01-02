@@ -64,18 +64,20 @@ function initializeLiff(myLiffId) {
  * Initialize the app by calling functions handling individual app components
  */
 function initializeApp() {
-    // pangil fungsi di sini
-    registerEventListeners();
-
     // check if the user is logged in OR logged out,
     // and disable inappropriate button.
     if (liff.isLoggedIn()) {
         $(`#not-loggedin`).hide();
+        getLiffProfile();
         showLoggedinElements();
+        initializeLoggedinElements();
     } else {
         $(`#liff-logout`).hide();
         showLoggedoutElements()
     }
+
+    // pangil fungsi di sini
+    registerEventListeners();
 }
 
 function initHideAll() {
@@ -94,8 +96,6 @@ function showLoggedinElements() {
     $('#menu-minuman').show();
     $('#ringkasan').show();
     $('#loggedin-statusMessage').show();
-    loadMenu("makanan", makanan_id_qty, nama_makanan, harga_makanan);
-    loadMenu("minuman", minuman_id_qty, nama_minuman, harga_minuman);
     if (liff.isInClient()) {
         $('#inApp').show();
     }
@@ -105,6 +105,26 @@ function showLoggedinElements() {
 }
 function showLoggedoutElements() {
     $(`#not-loggedin`).show();
+}
+
+function initializeLoggedinElements() {
+    loadMenu("makanan", makanan_id_qty, nama_makanan, harga_makanan);
+    loadMenu("minuman", minuman_id_qty, nama_minuman, harga_minuman);
+
+}
+
+var user_name = "";
+var user_pictureUrl = "";
+var user_statusMessage = "";
+function getLiffProfile() {
+    liff.getProfile().then(function (profile) {
+        user_name = profile.displayName;
+        user_pictureUrl = profile.pictureUrl;
+        user_statusMessage = profile.statusMessage;
+        // document.getElementById('greet').innerHTML = "Hi <b>" + user_name + "</b>! Please Choose Your Order!";
+    }).catch(function (error) {
+        window.alert('Error getting profile: ' + error);
+    });
 }
 
 function registerEventListeners() {
