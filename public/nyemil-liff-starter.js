@@ -65,11 +65,13 @@ function initializeLiff(myLiffId) {
  */
 function initializeApp() {
     // pangil fungsi di sini
+    initHideAll();
 
     // check if the user is logged in OR logged out,
     // and disable inappropriate button.
     if (liff.isLoggedIn()) {
-        $(`#liff-login`).hide();
+        $(`#not-loggedin`).hide();
+        $('#loggedin').show();
     } else {
         $(`#liff-logout`).hide();
     }
