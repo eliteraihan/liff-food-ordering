@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Catatan Harianku</title>
+    <title>Nyemil.id</title>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -10,14 +10,50 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="style.css">
 
-    <style>
-        .table>thead>tr>th {
-            padding: 60px;
-        }
-    </style>
 </head>
 
-<body onload="loadCatatan();">
+<body onload="loadOrderMenu();">
+    <header>
+        <div class="card">
+            <h1>Nyemil.id</h1>
+            <p>Tempat jajanan nyemil kekinian</p>
+        </div>
+    </header>
+
+    <main>
+        <div id="content" class="container center-block">
+            <div id="content" class="center-block">
+                <!-- class="hidden" -->
+                <div id="loggedin" class="card">
+                    <p>Hi <span class="bold">__NAMA_CUSTOMER__</span>!</p>
+                    <p>Kakak bisa pilih menu di bawah</p>
+
+                    <div id="menu-makanan" class="card">
+                        <h2>Makanan</h2>
+                    </div>
+
+                    <div id="menu-minuman" class="card">
+                        <h2>Minuman</h2>
+                    </div>
+                    <hr>
+
+                    <div id="ringkasan" class="card">
+                    </div>
+                </div>
+
+                <div id="not_loggedin" class="card">
+                    <p>Eits! Login dulu sebelum order ya,
+                        tinggal klik tombol di bawah ini</p>
+                    <center>
+                        <button type="button" class="btn btn-success">Log in</button>
+                    </center>
+                </div>
+            </div>
+    </main>
+
+    <footer>
+        <em><a href="#">Buka di external browser</a></em>
+    </footer>
 
     <div class="col-xs-12 col-md-8 col-md-offset-2" ng-controller="listContactCtrl">
         <div class="page-header">
@@ -147,9 +183,10 @@
                             page</a> for more information.</p>
                 </div>
             </div>
-        </div> <!--END OF Konten LIFF v2-->
+        </div>
+        <!--END OF Konten LIFF v2-->
 
-        <!--liffIdErrorMessage-->
+        <!--LIFF error handler-->
         <!-- LIFF ID ERROR -->
         <div id="liffIdErrorMessage" class="hidden">
             <p>You have not assigned any value for LIFF ID.</p>
@@ -181,13 +218,25 @@
         <div id="nodeLiffIdErrorMessage" class="hidden">
             <p>Unable to receive the LIFF ID as an environment variable.</p>
         </div>
-        <!--END OF liffIdErrorMessage-->
+        <!--END OF LIFF error handler-->
 
+    </div>
     </div>
 </body>
 
-<script src="catatan-config.js"></script>
+<script src="nyemil-config.js"></script>
+<!-- <script src="catatan-config.js"></script> -->
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <script src="liff-starter.js"></script>
+
+<script>
+    try {
+        loadMenu("makanan", makanan_id_qty, nama_makanan, harga_makanan);
+        loadMenu("minuman", minuman_id_qty, nama_minuman, harga_minuman);
+        // alert(Object.size(makanan_id_index));
+    } catch (error) {
+        alert(error);
+    }
+</script>
 
 </html>
