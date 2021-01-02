@@ -8,9 +8,9 @@ const harga_minuman = [1000, 2000, 4000];
 
 var global_i = 0;
 
-var data_ringkasan = ``;
-var nama_qty_consumable = "";
-var total_harga = 0;
+var global_data_ringkasan = ``;
+var global_nama_qty_consumable = "";
+var global_total_harga = 0;
 
 /**
  * https://stackoverflow.com/questions/5223/length-of-a-javascript-object
@@ -185,6 +185,10 @@ function isNonZero(kv) {
 }
 
 function cekCetakRingkasan(id) {
+    let data_ringkasan = ``;
+    let nama_qty_consumable = "";
+    let total_harga = 0;
+
     if (isNonZero(makanan_id_qty) || isNonZero(minuman_id_qty)) {
         $(`#ringkasan`).show("fast");
         data_ringkasan += `<h4>Ringkasan</h4>`;
