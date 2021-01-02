@@ -85,7 +85,7 @@ function loadMenu(consumable, id_qty, nama_consumable, harga_consumable) {
         // nama
         list_menu += `<tr>`;
         list_menu += `<th>${nama_consumable[index]}</th>`;
-        list_menu += `<th><button id="${id}-dec" class="btn btn-secondary hidden" onclick="decrement(${onclick_string})">-</button></th>`;  // versi button
+        list_menu += `<th><button id="${id}-dec" class="btn btn-secondary" onclick="decrement(${onclick_string})">-</button></th>`;  // versi button
         // list_menu += `<th><a class="btn btn-secondary" href="javascript:void(0)" onclick="decrement(${onclick_string})">-</a></th>`;     // versi anchor
         list_menu += `<th><span id="${id}-qty" class="width-qty"></span></th>`;
         list_menu += `<th><button id="${id}-inc" class="btn btn-success" onclick="increment(${onclick_string})">+</button></th>`;
@@ -114,7 +114,6 @@ function jenisConsumable(consumable) {
     // alert((consumable == "minuman") ? "minuman" : "makanan");
     return (consumable == "minuman") ? minuman_id_qty : makanan_id_qty;
 }
-
 function reverseJenisConsumable(consumable_id_qty) {
     // alert((consumable_id_qty == minuman_id_qty) ? "minuman" : "makanan");
     return (consumable_id_qty == minuman_id_qty) ? "minuman" : "makanan";
@@ -126,33 +125,47 @@ function decrement(id, id_qty) {
         id_qty[id] = 0;
     }
     // alert(id_qty[id]);
-    cekCetakQty(id, id_qty);
+    cekCetakQtyJq(id, id_qty);
 }
 function increment(id, id_qty) {
     ++id_qty[id];
     // alert(id_qty[id]);
-    cekCetakQty(id, id_qty);
+    cekCetakQtyJq(id, id_qty);
 }
 
 function cekCetakQty(id, id_qty) {
     let qty_element = document.getElementById(`${id}-qty`);
     let dec_button = document.getElementById(`${id}-dec`);
 
-    if (id_qty[id] <= 0) {
-        if (dec_button.classList.contains('hidden')) {
-            ;
-        } else {
-            dec_button.classList.add('hidden');
-        }
-        qty_element.innerHTML = "";
+    if (id_qty[id] <= 0 && !dec_button.classList.contains('hidden')) {
+        dec_button.classList.add('hidden');
+        qty_element.innerText = "";
     }
     else {
-        if (dec_button.classList.contains('hidden')) {
-            dec_button.classList.remove('hidden');
-        }
-        qty_element.innerHTML = id_qty[id];
+        dec_button.classList.remove('hidden');
+        qty_element.innerText = id_qty[id];
     }
     cekCetakRingkasan(id);
+}
+
+function cekCetakQtyJq(id, id_qty) {
+    let qty_element = $(`#${id}-qty`);  // JANGAN LUPA kalo id itu pake #
+    let dec_button = $(`#${id}-dec`);
+
+    try {
+        if (id_qty[id] <= 0) {
+            dec_button.hide("fast");
+            qty_element.text("");
+        }
+        else {
+            dec_button.show("fast");
+            qty_element.text(id_qty[id]);
+        }
+        // alert(`id = [${id}]   ||   value = [${id_qty[id]}]   ||   text = [${qty_element.text()}]`);
+        cekCetakRingkasan(id);
+    } catch (error) {
+        alert(error);
+    }
 }
 
 /**
@@ -173,7 +186,8 @@ function cekCetakRingkasan(id) {
     let total_harga = 0;
 
     if (isNonZero(makanan_id_qty) || isNonZero(minuman_id_qty)) {
-        hideElementId(`ringkasan`, false);
+        // hideElementId(`ringkasan`, false);
+        $(`#ringkasan`).show("fast");
         data_ringkasan += `<h4>Ringkasan</h4>`;
 
         for (id in makanan_id_index) {
@@ -202,7 +216,8 @@ function cekCetakRingkasan(id) {
         data_ringkasan += `</center>`;
     }
     else {
-        hideElementId(`ringkasan`, true);
+        // hideElementId(`ringkasan`, true);
+        $(`#ringkasan`).hide("fast");
     }
 
     try {
