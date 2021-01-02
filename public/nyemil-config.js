@@ -80,16 +80,18 @@ var minuman_id_qty = createKeyValuePairFromArray("bv_", Array(harga_minuman.leng
 function loadMenu(consumable, id_qty, nama_consumable, harga_consumable) {
     let index = 0;
     let menu_string = "menu-" + consumable;
-    var list_menu = $(`#${menu_string}`).html();
+    let list_menu = "";
+    list_menu += `<h2>`;
+    list_menu += (consumable == "makanan") ? `Makanan` : `Minuman`;
+    list_menu += `</h2>`;
     list_menu += `<table>`;
 
     for (id in id_qty) {
         let onclick_string = `'${id}', jenisConsumable('${consumable}')`;
-        // alert("[" + id + "]");
         // nama
         list_menu += `<tr>`;
         list_menu += `<th>${nama_consumable[index]}</th>`;
-        list_menu += `<th><button id="${id}-dec" class="btn btn-secondary" onclick="decrement(${onclick_string})">-</button></th>`;  // versi button
+        list_menu += `<th><button id="${id}-dec" class="btn btn-secondary" onclick="decrement(${onclick_string} style="display: none;")">-</button></th>`;  // versi button
         // list_menu += `<th><a class="btn btn-secondary" href="javascript:void(0)" onclick="decrement(${onclick_string})">-</a></th>`;     // versi anchor
         list_menu += `<th><span id="${id}-qty" class="width-qty"></span></th>`;
         list_menu += `<th><button id="${id}-inc" class="btn btn-success" onclick="increment(${onclick_string})">+</button></th>`;
@@ -111,7 +113,7 @@ function loadMenu(consumable, id_qty, nama_consumable, harga_consumable) {
 
     try {
         // document.getElementById(menu_string).innerHTML = list_menu;
-        $("#" + menu_string).html(list_menu);
+        $(`#${menu_string}`).html(list_menu);
         // alert("LOADED!");
     } catch (error) {
         alert(error);
@@ -200,26 +202,29 @@ function cekCetakRingkasan(id) {
 
         for (id in makanan_id_index) {
             if (makanan_id_qty[id] > 0) {
-                nama_qty_consumable += `${makanan_id_qty[id]} * `;
+                nama_qty_consumable += `${makanan_id_qty[id]} × `;
                 nama_qty_consumable += `${makanan_id_nama[id]}<br>`;
                 total_harga += (makanan_id_qty[id] * makanan_id_harga[id]);
             }
         }
         for (id in minuman_id_index) {
             if (minuman_id_qty[id] > 0) {
-                nama_qty_consumable += `${minuman_id_qty[id]} * `;
+                nama_qty_consumable += `${minuman_id_qty[id]} × `;
                 nama_qty_consumable += `${minuman_id_nama[id]}<br>`;
                 total_harga += (minuman_id_qty[id] * minuman_id_harga[id]);
             }
         }
         list_pesanan = nama_qty_consumable + `IDR ${total_harga.toLocaleString()}`;
-        // alert(list_pesanan);
 
         data_ringkasan += `${list_pesanan}<br>`;
         data_ringkasan += `<center>`;
         // data_ringkasan += `<button id="konfirmasi-pesanan" type="button" class="btn btn-success" onclick="konfirmasiPesanan(${total_harga});">Konfirmasi Pesanan</button>`;
         data_ringkasan += `<button id="konfirmasi-pesanan" type="button" class="btn btn-success">Konfirmasi Pesanan</button>`;
         data_ringkasan += `</center>`;
+
+        global_data_ringkasan = data_ringkasan;
+        global_nama_qty_consumable = nama_qty_consumable;
+        global_total_harga = total_harga;
     }
     else {
         $(`#ringkasan`).hide("fast");

@@ -95,6 +95,7 @@ function initHideAll() {
 
 function showLoggedinElements() {
     $('#loggedin').show();
+    putLiffProfile();
     $('#menu-makanan').show();
     $('#menu-minuman').show();
     $('#loggedin-statusMessage').show();
@@ -123,10 +124,17 @@ function getLiffProfile() {
         user_name = profile.displayName;
         user_pictureUrl = profile.pictureUrl;
         user_statusMessage = profile.statusMessage;
-        // document.getElementById('greet').innerHTML = "Hi <b>" + user_name + "</b>! Please Choose Your Order!";
     }).catch(function (error) {
         window.alert('Error getting profile: ' + error);
     });
+}
+function putLiffProfile() {
+    let data = `Hi`;
+    data += `<img src="${user_pictureUrl}" alt="user display picture">`;
+    data += `<span id="user-name" class="bold">${user_name}</span>!`;
+    data += `<p>Kakak bisa pilih menu di bawah</p>`;
+
+    $('#user-profile').html(data);
 }
 
 function registerEventListeners() {
@@ -152,23 +160,28 @@ function registerEventListeners() {
         if (!liff.isInClient()) {
             konfirmasiPesanan();
         } else {
-            let message = `Hai Customer,
+            let message = `Hai ${user_name},
 
             Terima kasih telah memesan makanan,
-            berikut adalah review pesanannya :
+            berikut adalah review pesanannya.
 
-            __PESANAN__
+            Item :
+            ${global_nama_qty_consumable}
+
+            Jumlah :
+            IDR ${global_total_harga.toLocaleString()}
 
             Pesanan kakak akan segera diproses dan
             akan diberitahu jika sudah bisa diambil.
 
-            Mohon ditunggu ya!`;
+            Mohon ditunggu ya!
+            RECEIPT [${(Date.now() % 2097152).toLocaleString()}]`;
 
             liff.sendMessages([{
                 'type': 'text',
-                'text': "Anda telah menggunakan fitur Send Message!"
+                'text': message
             }]).then(function () {
-                window.alert('Ini adalah pesan dari fitur Send Message');
+                window.alert('Resi telah dikirim.');
             }).catch(function (error) {
                 window.alert('Error sending message: ' + error);
             });
@@ -177,6 +190,5 @@ function registerEventListeners() {
 }
 
 function konfirmasiPesanan() {
-    alert(`Invoice order code [${(Date.now() % 2097152).toLocaleString()}]\n` + `Total [IDR ${total_harga.toLocaleString()}]`);
-    // tbd
+    alert(`RECEIPT [${(Date.now() % 2097152).toLocaleString()}]\n` + `Total [IDR ${global_total_harga.toLocaleString()}]`);
 }
