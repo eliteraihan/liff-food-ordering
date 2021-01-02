@@ -66,6 +66,7 @@ function initializeLiff(myLiffId) {
 function initializeApp() {
     // pangil fungsi di sini
     initHideAll();
+    registerEventListeners();
 
     // check if the user is logged in OR logged out,
     // and disable inappropriate button.
