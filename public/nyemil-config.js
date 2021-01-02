@@ -154,37 +154,71 @@ function cekCetakQty(id, id_qty) {
     cekCetakRingkasan(id);
 }
 
+/**
+ * https://stackoverflow.com/questions/11317688/finding-the-key-of-the-max-value-in-a-javascript-array
+ * https://javascript.info/keys-values-entries
+ */
+function isNonZero(kv) {
+    try {
+        return (Math.max(...Object.values(kv)) > 0) ? true : false;
+    } catch (error) {
+        alert(error);
+    }
+}
+
 function cekCetakRingkasan(id) {
-    let data_ringkasan = `<h4>Ringkasan</h4>`;
+    let data_ringkasan = ``;
     let nama_qty_consumable = "";
     let total_harga = 0;
 
-    for (id in makanan_id_index) {
-        if (makanan_id_qty[id] > 0) {
-            nama_qty_consumable += `${makanan_id_qty[id]} * `;
-            nama_qty_consumable += `${makanan_id_nama[id]} <br>`;
-            total_harga += (makanan_id_qty[id] * makanan_id_harga[id]);
-        }
-    }
-    for (id in minuman_id_index) {
-        if (minuman_id_qty[id] > 0) {
-            nama_qty_consumable += `${minuman_id_qty[id]} * `;
-            nama_qty_consumable += `${minuman_id_nama[id]} <br>`;
-            total_harga += (minuman_id_qty[id] * minuman_id_harga[id]);
-        }
-    }
-    list_pesanan = nama_qty_consumable + `IDR ${total_harga.toLocaleString()}`;
-    // alert(list_pesanan);
+    if (isNonZero(makanan_id_qty) || isNonZero(minuman_id_qty)) {
+        hideRingkasan(false);
+        data_ringkasan += `<h4>Ringkasan</h4>`;
 
-    data_ringkasan += `${list_pesanan} <br>`;
-    data_ringkasan += `<center>`;
-    data_ringkasan += `<button id="confirm" type="button" class="btn btn-success" onclick="konfirmasiPesanan(${total_harga});">Konfirmasi Pesanan</button>`;
-    data_ringkasan += `</center>`;
+        for (id in makanan_id_index) {
+            if (makanan_id_qty[id] > 0) {
+                nama_qty_consumable += `${makanan_id_qty[id]} * `;
+                nama_qty_consumable += `${makanan_id_nama[id]} <br>`;
+                total_harga += (makanan_id_qty[id] * makanan_id_harga[id]);
+            }
+            else {
+
+            }
+        }
+        for (id in minuman_id_index) {
+            if (minuman_id_qty[id] > 0) {
+                nama_qty_consumable += `${minuman_id_qty[id]} * `;
+                nama_qty_consumable += `${minuman_id_nama[id]} <br>`;
+                total_harga += (minuman_id_qty[id] * minuman_id_harga[id]);
+            }
+        }
+        list_pesanan = nama_qty_consumable + `IDR ${total_harga.toLocaleString()}`;
+        // alert(list_pesanan);
+
+        data_ringkasan += `${list_pesanan} <br>`;
+        data_ringkasan += `<center>`;
+        data_ringkasan += `<button id="confirm" type="button" class="btn btn-success" onclick="konfirmasiPesanan(${total_harga});">Konfirmasi Pesanan</button>`;
+        data_ringkasan += `</center>`;
+    }
+    else {
+        hideRingkasan(true);
+    }
+
     try {
         // document.getElementById(`ringkasan`).innerHTML = data_ringkasan;
         $(`#ringkasan`).html(data_ringkasan);
     } catch (error) {
         alert(error);
+    }
+}
+
+function hideRingkasan(hide = true) {
+    let ringkasan_element = document.getElementById(`ringkasan`);
+    if (hide == true && !ringkasan_element.classList.contains('hidden')) {
+        ringkasan_element.classList.add('hidden');
+    }
+    else {
+        ringkasan_element.classList.remove('hidden');
     }
 }
 
