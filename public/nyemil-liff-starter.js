@@ -92,6 +92,8 @@ function showLoggedinElements() {
     $('#menu-minuman').show();
     $('#ringkasan').show();
     $('#loggedin-statusMessage').show();
+    loadMenu("makanan", makanan_id_qty, nama_makanan, harga_makanan);
+    loadMenu("minuman", minuman_id_qty, nama_minuman, harga_minuman);
     if (liff.isInClient()) {
         $('#inApp').show();
     }
