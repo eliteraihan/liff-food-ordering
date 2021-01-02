@@ -94,7 +94,6 @@ function showLoggedinElements() {
     $('#loggedin').show();
     $('#menu-makanan').show();
     $('#menu-minuman').show();
-    $('#ringkasan').show();
     $('#loggedin-statusMessage').show();
     if (liff.isInClient()) {
         $('#inApp').show();
