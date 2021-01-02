@@ -8,6 +8,10 @@ const harga_minuman = [1000, 2000, 4000];
 
 var global_i = 0;
 
+var data_ringkasan = ``;
+var nama_qty_consumable = "";
+var total_harga = 0;
+
 /**
  * https://stackoverflow.com/questions/5223/length-of-a-javascript-object
  */
@@ -76,11 +80,11 @@ var minuman_id_qty = createKeyValuePairFromArray("bv_", Array(harga_minuman.leng
 function loadMenu(consumable, id_qty, nama_consumable, harga_consumable) {
     let index = 0;
     let menu_string = "menu-" + consumable;
-    var list_menu = document.getElementById(menu_string).innerHTML;
+    var list_menu = $(`#${menu_string}`).html();
     list_menu += `<table>`;
 
     for (id in id_qty) {
-        let onclick_string = `'` + id + `',` + ` jenisConsumable('` + consumable + `')`;
+        let onclick_string = `'${id}', jenisConsumable('${consumable}')`;
         // alert("[" + id + "]");
         // nama
         list_menu += `<tr>`;
@@ -181,10 +185,6 @@ function isNonZero(kv) {
 }
 
 function cekCetakRingkasan(id) {
-    let data_ringkasan = ``;
-    let nama_qty_consumable = "";
-    let total_harga = 0;
-
     if (isNonZero(makanan_id_qty) || isNonZero(minuman_id_qty)) {
         $(`#ringkasan`).show("fast");
         data_ringkasan += `<h4>Ringkasan</h4>`;
@@ -192,26 +192,24 @@ function cekCetakRingkasan(id) {
         for (id in makanan_id_index) {
             if (makanan_id_qty[id] > 0) {
                 nama_qty_consumable += `${makanan_id_qty[id]} * `;
-                nama_qty_consumable += `${makanan_id_nama[id]} <br>`;
+                nama_qty_consumable += `${makanan_id_nama[id]}<br>`;
                 total_harga += (makanan_id_qty[id] * makanan_id_harga[id]);
-            }
-            else {
-
             }
         }
         for (id in minuman_id_index) {
             if (minuman_id_qty[id] > 0) {
                 nama_qty_consumable += `${minuman_id_qty[id]} * `;
-                nama_qty_consumable += `${minuman_id_nama[id]} <br>`;
+                nama_qty_consumable += `${minuman_id_nama[id]}<br>`;
                 total_harga += (minuman_id_qty[id] * minuman_id_harga[id]);
             }
         }
         list_pesanan = nama_qty_consumable + `IDR ${total_harga.toLocaleString()}`;
         // alert(list_pesanan);
 
-        data_ringkasan += `${list_pesanan} <br>`;
+        data_ringkasan += `${list_pesanan}<br>`;
         data_ringkasan += `<center>`;
-        data_ringkasan += `<button id="confirm" type="button" class="btn btn-success" onclick="konfirmasiPesanan(${total_harga});">Konfirmasi Pesanan</button>`;
+        // data_ringkasan += `<button id="konfirmasi-pesanan" type="button" class="btn btn-success" onclick="konfirmasiPesanan(${total_harga});">Konfirmasi Pesanan</button>`;
+        data_ringkasan += `<button id="konfirmasi-pesanan" type="button" class="btn btn-success">Konfirmasi Pesanan</button>`;
         data_ringkasan += `</center>`;
     }
     else {
@@ -226,7 +224,6 @@ function cekCetakRingkasan(id) {
     }
 }
 
-function konfirmasiPesanan(price) {
-    alert(`Invoice order code [${(Date.now() % 2097152).toLocaleString()}]\n` + `Total [IDR ${price.toLocaleString()}]`);
-    // tbd
-}
+// function konfirmasiPesanan() {
+//     alert(`Invoice order code [${(Date.now() % 2097152).toLocaleString()}]\n` + `Total [IDR ${total_harga.toLocaleString()}]`);
+// }

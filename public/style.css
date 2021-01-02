@@ -124,3 +124,8 @@ button#confirm {
 span.qty {
     padding: 0px 8px;
 }
+
+#loggedinStatusMessage a {
+    font-style: italic;
+    color: grey;
+}

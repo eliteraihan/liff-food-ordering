@@ -25,7 +25,7 @@
             <div id="content" class="center-block">
                 <!-- class="hidden" -->
                 <div id="loggedin" class="card">
-                    <p>Hi <span class="bold">__NAMA_CUSTOMER__</span>!</p>
+                    <p>Hi <span id="user-nama" class="bold">__NAMA_CUSTOMER__</span>!</p>
                     <p>Kakak bisa pilih menu di bawah</p>
 
                     <div id="menu-makanan" class="card">
@@ -39,20 +39,67 @@
 
                     <div id="ringkasan" class="card">
                     </div>
+
+                    <div id="loggedin-statusMessage" class="card">
+                        <center>
+                            <div id="inApp">
+                                <a id="liff-external" href="#">Buka di external browser</a>
+                            </div>
+                            <div id="notInApp">
+                                <a id="liff-logout" href="#">Log out</a>
+                            </div>
+                        </center>
+                    </div>
                 </div>
 
-                <div id="not_loggedin" class="card">
-                    <p>Eits! Login dulu sebelum order ya,
-                        tinggal klik tombol di bawah ini</p>
+                <div id="not-loggedin" class="card">
+                    <h4>Pengen nyemil kak? Silakan order~</h4>
+                    <p>Eits! Login dulu sebelum order ya, tinggal klik tombol di bawah ini</p>
                     <center>
-                        <button type="button" class="btn btn-success">Log in</button>
+                        <button id="liff-login" type="button" class="btn btn-success">Log in</button>
                     </center>
                 </div>
             </div>
     </main>
 
     <footer>
-        <em><a href="#">Buka di external browser</a></em>
+        <div id="liffErrors" class="card center-block">
+            <!-- LIFF ID ERROR -->
+            <div id="liffIdErrorMessage" class="hidden">
+                <p>You have not assigned any value for LIFF ID.</p>
+                <p>If you are running the app using Node.js, please set the LIFF ID as an environment variable in
+                    your
+                    Heroku account follwing the below steps: </p>
+                <code id="code-block">
+            <ol>
+                <li>Go to `Dashboard` in your Heroku account.</li>
+                <li>Click on the app you just created.</li>
+                <li>Click on `Settings` and toggle `Reveal Config Vars`.</li>
+                <li>Set `MY_LIFF_ID` as the key and the LIFF ID as the value.</li>
+                <li>Your app should be up and running. Enter the URL of your app in a web browser.</li>
+            </ol>
+        </code>
+                <p>If you are using any other platform, please add your LIFF ID in the <code>index.html</code> file.
+                </p>
+                <p>For more information about how to add your LIFF ID, see <a
+                        href="https://developers.line.biz/en/reference/liff/#initialize-liff-app">Initializing the
+                        LIFF
+                        app</a>.</p>
+            </div>
+
+            <!-- LIFF INIT ERROR -->
+            <div id="liffInitErrorMessage" class="hidden">
+                <p>Something went wrong with LIFF initialization.</p>
+                <p>LIFF initialization can fail if a user clicks "Cancel" on the "Grant permission" screen, or if an
+                    error
+                    occurs in the process of <code>liff.init()</code>.
+            </div>
+
+            <!-- NODE.JS LIFF ID ERROR -->
+            <div id="nodeLiffIdErrorMessage" class="hidden">
+                <p>Unable to receive the LIFF ID as an environment variable.</p>
+            </div>
+        </div>
     </footer>
 
     <div class="col-xs-12 col-md-8 col-md-offset-2" ng-controller="listContactCtrl">
@@ -66,81 +113,6 @@
                 <li><a id="nav-tambah-catatan" href="javascript:void(0);" onclick="gantiMenu('tambah-catatan');">Tambah
                         Catatan</a></li>
             </ul>
-        </div>
-
-        <div id="tambah-catatan" class="well" style="display:none;">
-            <form id="form-data">
-                <div id="nama-group" class="form-group">
-                    <label>Nama:</label>
-                    <input type="text" class="form-control" id="nama" name="nama">
-                </div>
-                <div id="tanggal-group" class="form-group">
-                    <label>Tanggal:</label>
-                    <input type="text" class="form-control" id="tanggal" name="tanggal">
-                </div>
-                <div id="agenda-group" class="form-group">
-                    <label>Agenda:</label>
-                    <textarea class="form-control" id="agenda" name="agenda"></textarea><br />
-                </div>
-                <input type="button" value="Simpan" onclick="simpanData();" class="btn btn-success btn-small" />
-                <input type="reset" value="Reset" onclick="" class="btn btn-warning btn-small" />
-            </form>
-        </div>
-
-        <div id="edit-data" class="well" style="display:none;">
-            <form id="eform-data">
-
-                <div id="nama-group" class="form-group" style="display:none;">
-                    <label>id data:</label>
-                    <input type="text" class="form-control" id="eid_data" name="nama">
-                </div>
-
-                <div id="nama-group" class="form-group">
-                    <label>Nama:</label>
-                    <input type="text" class="form-control" id="enama" name="nama">
-                </div>
-                <div id="tanggal-group" class="form-group">
-                    <label>Tanggal:</label>
-                    <input type="text" class="form-control" id="etanggal" name="tanggal">
-                </div>
-                <div id="agenda-group" class="form-group">
-                    <label>Agenda:</label>
-                    <textarea class="form-control" id="eagenda" name="agenda"></textarea><br />
-                </div>
-                <input type="button" value="Simpan" onclick="simpanEditData();" class="btn btn-success btn-small" />
-                <input type="reset" value="Reset" onclick="" class="btn btn-warning btn-small" />
-                <input type="button" value="Cancel" onclick="gantiMenu('list-catatan');"
-                    class="btn btn-warning btn-small" />
-            </form>
-        </div>
-
-        <div id="lihat-data" class="well" style="display:none;">
-            <form id="eform-data">
-
-                <div id="nama-group" class="form-group" style="display:none;">
-                    <label for="disabled">id data:</label>
-                    <input type="text" class="form-control" id="lid_data" name="nama" disabled>
-                </div>
-
-                <div id="nama-group" class="form-group">
-                    <label for="disabled">Nama:</label>
-                    <input type="text" class="form-control" id="lnama" name="nama" disabled>
-                </div>
-                <div id="tanggal-group" class="form-group">
-                    <label for="disabled">Tanggal:</label>
-                    <input type="text" class="form-control" id="ltanggal" name="tanggal" disabled>
-                </div>
-                <div id="agenda-group" class="form-group">
-                    <label for="disabled">Agenda:</label>
-                    <textarea class="form-control" id="lagenda" name="agenda" disabled></textarea>
-                </div>
-                <input type="button" value="Kembali" onclick="gantiMenu('list-catatan');"
-                    class="btn btn-warning btn-small" />
-            </form>
-        </div>
-
-        <div id="list-catatan" class="well">
-            Pilih List Catatan untuk melihat catatan yang sudah dibuat.
         </div>
 
         <!--Konten LIFF v2-->
@@ -186,53 +158,20 @@
         </div>
         <!--END OF Konten LIFF v2-->
 
-        <!--LIFF error handler-->
-        <!-- LIFF ID ERROR -->
-        <div id="liffIdErrorMessage" class="hidden">
-            <p>You have not assigned any value for LIFF ID.</p>
-            <p>If you are running the app using Node.js, please set the LIFF ID as an environment variable in your
-                Heroku account follwing the below steps: </p>
-            <code id="code-block">
-                <ol>
-                    <li>Go to `Dashboard` in your Heroku account.</li>
-                    <li>Click on the app you just created.</li>
-                    <li>Click on `Settings` and toggle `Reveal Config Vars`.</li>
-                    <li>Set `MY_LIFF_ID` as the key and the LIFF ID as the value.</li>
-                    <li>Your app should be up and running. Enter the URL of your app in a web browser.</li>
-                </ol>
-            </code>
-            <p>If you are using any other platform, please add your LIFF ID in the <code>index.html</code> file.</p>
-            <p>For more information about how to add your LIFF ID, see <a
-                    href="https://developers.line.biz/en/reference/liff/#initialize-liff-app">Initializing the LIFF
-                    app</a>.</p>
-        </div>
-
-        <!-- LIFF INIT ERROR -->
-        <div id="liffInitErrorMessage" class="hidden">
-            <p>Something went wrong with LIFF initialization.</p>
-            <p>LIFF initialization can fail if a user clicks "Cancel" on the "Grant permission" screen, or if an error
-                occurs in the process of <code>liff.init()</code>.
-        </div>
-
-        <!-- NODE.JS LIFF ID ERROR -->
-        <div id="nodeLiffIdErrorMessage" class="hidden">
-            <p>Unable to receive the LIFF ID as an environment variable.</p>
-        </div>
-        <!--END OF LIFF error handler-->
-
-    </div>
     </div>
 </body>
 
 <script src="nyemil-config.js"></script>
 <!-- <script src="catatan-config.js"></script> -->
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-<script src="liff-starter.js"></script>
+<!-- <script src="liff-starter.js"></script> -->
+<script src="nyemil-liff-starter.js"></script>
 
 <script>
     try {
-        loadMenu("makanan", makanan_id_qty, nama_makanan, harga_makanan);
-        loadMenu("minuman", minuman_id_qty, nama_minuman, harga_minuman);
+        initHideAll();
+        // loadMenu("makanan", makanan_id_qty, nama_makanan, harga_makanan);
+        // loadMenu("minuman", minuman_id_qty, nama_minuman, harga_minuman);
         // alert(Object.size(makanan_id_index));
     } catch (error) {
         alert(error);
