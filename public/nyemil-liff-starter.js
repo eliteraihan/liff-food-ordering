@@ -71,6 +71,7 @@ function initializeApp() {
     // and disable inappropriate button.
     if (liff.isLoggedIn()) {
         $(`#not-loggedin`).hide();
+        showLoggedinElements();
     } else {
         $(`#liff-logout`).hide();
     }
