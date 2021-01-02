@@ -1,31 +1,87 @@
 html {
     font-size: 11px;
+    max-width: 100%;
+    text-align: center;
 }
- 
+
+p .normal {
+    font-weight: normal;
+}
+
+p .bold {
+    font-weight: bold;
+}
+
+p .bolder {
+    font-weight: 900;
+}
+
+body *:hover {
+    /* style debugger */
+    border: 1px dashed darkcyan;
+}
+
+main #content {
+    text-align: left;
+    max-width: 400pt;
+    min-width: min-content;
+}
+
+#loggedin>div>h2 {
+    padding-bottom: 10pt;
+}
+
 table {
     width: 100%;
     overflow-x: auto;
     display: block;
 }
- 
-div {
-    max-width: 100%;
+
+.width-qty {
+    width: 25%;
     text-align: center;
+    margin: 0 5pt 0;
 }
- 
-th {
+
+.textLeft {
     text-align: left;
 }
- 
-img { 
-    max-width: 25%; 
-    height: auto; 
+
+tr>th {
+    width: 100%;
 }
- 
+
+tr>th~th {
+    margin: 0;
+}
+
+.harga {
+    text-align: left;
+    padding: 5pt 0 15pt;
+}
+
+img {
+    max-width: 25%;
+    height: auto;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
 button {
     margin: 4px;
 }
- 
+
+button#confirm {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5pt 0;
+}
+
 #code-block {
     background-color: #eee;
     border: 1px solid #999;
@@ -37,21 +93,34 @@ button {
     overflow-x: auto;
     white-space: nowrap;
 }
- 
+
 #statusMessage {
     position: relative;
     top: 40px;
 }
- 
-.textLeft {
-    text-align: left;
-}
- 
+
 .buttonGroup {
     position: relative;
     top: 20px;
 }
- 
+
 .hidden {
     display: none;
+}
+
+.card {
+    min-width: fit-content;
+    float: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.card>h2 {
+    text-align: center;
+}
+
+span.qty {
+    padding: 0px 8px;
 }
