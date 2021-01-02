@@ -71,7 +71,6 @@ function initializeApp() {
     // and disable inappropriate button.
     if (liff.isLoggedIn()) {
         $(`#not-loggedin`).hide();
-        $('#loggedin').show();
     } else {
         $(`#liff-logout`).hide();
     }
@@ -85,6 +84,20 @@ function initHideAll() {
     $('#loggedin-statusMessage').hide();
     $('#inApp').hide();
     $('#notInApp').hide();
+}
+
+function showLoggedinElements() {
+    $('#loggedin').show();
+    $('#menu-makanan').show();
+    $('#menu-minuman').show();
+    $('#ringkasan').show();
+    $('#loggedin-statusMessage').show();
+    if (liff.isInClient()) {
+        $('#inApp').show();
+    }
+    else {
+        $('#notInApp').show();
+    }
 }
 
 function registerEventListeners() {
