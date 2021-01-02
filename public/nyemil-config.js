@@ -186,7 +186,6 @@ function cekCetakRingkasan(id) {
     let total_harga = 0;
 
     if (isNonZero(makanan_id_qty) || isNonZero(minuman_id_qty)) {
-        // hideElementId(`ringkasan`, false);
         $(`#ringkasan`).show("fast");
         data_ringkasan += `<h4>Ringkasan</h4>`;
 
@@ -216,7 +215,6 @@ function cekCetakRingkasan(id) {
         data_ringkasan += `</center>`;
     }
     else {
-        // hideElementId(`ringkasan`, true);
         $(`#ringkasan`).hide("fast");
     }
 
@@ -225,16 +223,6 @@ function cekCetakRingkasan(id) {
         $(`#ringkasan`).html(data_ringkasan);
     } catch (error) {
         alert(error);
-    }
-}
-
-function hideElementId(id, hide = true) {
-    let id_element = document.getElementById(id);
-    if (hide == true && !id_element.classList.contains('hidden')) {
-        id_element.classList.add('hidden');
-    }
-    else {
-        id_element.classList.remove('hidden');
     }
 }
 
