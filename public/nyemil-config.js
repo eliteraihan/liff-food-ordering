@@ -101,6 +101,11 @@ function loadMenu(consumable, id_qty, nama_consumable, harga_consumable) {
         list_menu += `<td class="harga">IDR ${harga_consumable[index].toLocaleString()}</td>`;    //n.toLocaleString()
         list_menu += `</tr>`;
         ++index;
+
+        // initialization: hide decrement button
+        $(`#${id}-dec`).hide();
+        $(`#${id}-qty`).hide();
+        $(`#${id}-inc`).hide();
     }
     list_menu += `</table>`;
 
