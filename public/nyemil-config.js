@@ -167,6 +167,7 @@ function cekCetakQtyJq(id, id_qty) {
         }
         else {
             dec_button.show("fast");
+            qty_element.show();
             qty_element.text(id_qty[id]);
         }
         // alert(`id = [${id}]   ||   value = [${id_qty[id]}]   ||   text = [${qty_element.text()}]`);
