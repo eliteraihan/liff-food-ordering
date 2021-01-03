@@ -229,9 +229,14 @@ function registerLoggedoutEventListeners() {
 
 function prosesItemHtmlToPlain(consumable) {
     let plain = $(`#nama-qty-${consumable}`).html();
-    plain = plain.trim();
-    plain = plain.replace(/<p>/g, "");
-    plain = plain.replace(/<\/p>/g, "\n");
+    if (plain) {
+        plain = plain.trim();
+        plain = plain.replace(/<p>/g, "");
+        plain = plain.replace(/<\/p>/g, "\n");
+    }
+    else {
+        plain = "";
+    }
 
     return plain;
 }
