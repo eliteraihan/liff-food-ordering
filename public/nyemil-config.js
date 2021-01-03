@@ -189,7 +189,8 @@ function isNonZero(kv) {
 
 function cekCetakRingkasan(id) {
     let ringkasan_html = ``;
-    let nama_qty_consumable = "";
+    // let nama_qty_makanan = ``;
+    // let nama_qty_minuman = ``;
     let total_harga = 0;
 
     try {
@@ -200,33 +201,38 @@ function cekCetakRingkasan(id) {
             ringkasan_html += `<h4 class="bold">Ringkasan Pesanan</h4>`;
         }
 
-        if (isNonZero(makanan_id_qty)) {
-            ringkasan_html += `<h5 class="bold">Makanan :</h5>`;
-            nama_qty_consumable += `<div id="nama-qty-makanan">`;
-            for (id in makanan_id_index) {
-                if (makanan_id_qty[id] > 0) {
-                    nama_qty_consumable += `<p>${makanan_id_qty[id]} x `;
-                    nama_qty_consumable += `${makanan_id_nama[id]}</p>`;
-                    total_harga += (makanan_id_qty[id] * makanan_id_harga[id]);
-                }
-            }
-            nama_qty_consumable += `</div><br>`;
-        }
+        // if (isNonZero(makanan_id_qty)) {
+        //     ringkasan_html += `<h5 class="bold">Makanan :</h5>`;
+        //     nama_qty_makanan += `<div id="nama-qty-makanan">`;
+        //     for (id in makanan_id_index) {
+        //         if (makanan_id_qty[id] > 0) {
+        //             nama_qty_makanan += `<p>${makanan_id_qty[id]} x `;
+        //             nama_qty_makanan += `${makanan_id_nama[id]}</p>`;
+        //             total_harga += (makanan_id_qty[id] * makanan_id_harga[id]);
+        //         }
+        //     }
+        //     nama_qty_makanan += `</div>`;
+        //     ringkasan_html += `${nama_qty_makanan}<br>`;
+        // }
 
-        if (isNonZero(minuman_id_qty)) {
-            ringkasan_html += `<h5 class="bold">Minuman :</h5>`;
-            nama_qty_consumable += `<div id="nama-qty-minuman">`;
-            for (id in minuman_id_index) {
-                if (minuman_id_qty[id] > 0) {
-                    nama_qty_consumable += `<p>${minuman_id_qty[id]} x `;
-                    nama_qty_consumable += `${minuman_id_nama[id]}</p>`;
-                    total_harga += (minuman_id_qty[id] * minuman_id_harga[id]);
-                }
-            }
-            nama_qty_consumable += `</div>`;
-        }
-        ringkasan_html += `${nama_qty_consumable}<br>`;
+        // if (isNonZero(minuman_id_qty)) {
+        //     ringkasan_html += `<h5 class="bold">Minuman :</h5>`;
+        //     nama_qty_minuman += `<div id="nama-qty-minuman">`;
+        //     for (id in minuman_id_index) {
+        //         if (minuman_id_qty[id] > 0) {
+        //             nama_qty_minuman += `<p>${minuman_id_qty[id]} x `;
+        //             nama_qty_minuman += `${minuman_id_nama[id]}</p>`;
+        //             total_harga += (minuman_id_qty[id] * minuman_id_harga[id]);
+        //         }
+        //     }
+        //     nama_qty_minuman += `</div>`;
+        //     ringkasan_html += `${nama_qty_minuman}<br>`;
+        // }
+
+        ringkasan_html += qtyToHtmlString(id, "makanan", makanan_id_qty, makanan_id_nama, makanan_id_harga);
+        ringkasan_html += qtyToHtmlString(id, "minuman", minuman_id_qty, minuman_id_nama, minuman_id_harga);
         ringkasan_html += `<br>Total : IDR ${total_harga.toLocaleString()}`;
+
         global_ringkasan_html = ringkasan_html;
         global_total_harga = total_harga;
 
@@ -235,4 +241,26 @@ function cekCetakRingkasan(id) {
     } catch (error) {
         window.alert(error);
     }
+}
+
+function qtyToHtmlString(id, consumable, consumable_id_qty, consumable_id_nama, consumable_id_harga) {
+    let ringkasan_html = ``;
+    let nama_qty_consumable = ``;
+    let consumable_header = (consumable == "makanan") ? "Makanan" : "Minuman";
+
+    if (isNonZero(consumable_id_qty)) {
+        ringkasan_html += `<h5 class="bold">${consumable_header} :</h5>`;
+        nama_qty_consumable += `<div id="nama-qty-${consumable}">`;
+        for (id in consumable_id_index) {
+            if (consumable_id_qty[id] > 0) {
+                nama_qty_consumable += `<p>${consumable_id_qty[id]} x `;
+                nama_qty_consumable += `${consumable_id_nama[id]}</p>`;
+                total_harga += (consumable_id_qty[id] * consumable_id_harga[id]);
+            }
+        }
+        nama_qty_consumable += `</div>`;
+        ringkasan_html += `${nama_qty_consumable}<br>`;
+    }
+
+    return ringkasan_html;
 }
