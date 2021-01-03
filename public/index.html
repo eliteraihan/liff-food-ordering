@@ -21,43 +21,48 @@
     </header>
 
     <main>
+        <div id="loading" class="container center-block">
+            <h2>
+                Initializing . . .
+            </h2>
+            <p>Please wait</p>
+        </div>
         <div id="content" class="container center-block">
-            <div id="content" class="center-block">
-                <!-- class="hidden" -->
-                <div id="loggedin" class="card">
-                    <div id="user-profile">
-                    </div>
-
-                    <div id="menu-makanan" class="card">
-                    </div>
-
-                    <div id="menu-minuman" class="card">
-                    </div>
-                    <hr>
-
-                    <div id="ringkasan" class="card">
-                    </div>
-
-                    <div id="loggedin-statusMessage" class="card">
-                        <center>
-                            <div id="inApp">
-                                <a id="liff-external" href="#">Buka di external browser</a>
-                            </div>
-                            <div id="notInApp">
-                                <a id="liff-logout" href="#">Log out</a>
-                            </div>
-                        </center>
-                    </div>
+            <!-- class="hidden" -->
+            <div id="loggedin" class="card">
+                <div id="user-profile">
                 </div>
 
-                <div id="not-loggedin" class="card">
-                    <h4>Pengen nyemil kak? Silakan order~</h4>
-                    <p>Eits! Login dulu sebelum order ya, tinggal klik tombol di bawah ini</p>
+                <div id="menu-makanan" class="card">
+                </div>
+
+                <div id="menu-minuman" class="card">
+                </div>
+                <hr>
+
+                <div id="ringkasan" class="card">
+                </div>
+
+                <div id="loggedin-statusMessage" class="card">
                     <center>
-                        <button id="liff-login" type="button" class="btn btn-success">Log in</button>
+                        <div id="inApp">
+                            <a id="liff-external" href="#">Buka di external browser</a>
+                        </div>
+                        <div id="notInApp">
+                            <a id="liff-logout" href="#">Log out</a>
+                        </div>
                     </center>
                 </div>
             </div>
+
+            <div id="not-loggedin" class="card">
+                <h4>Pengen nyemil kak? Silakan order~</h4>
+                <p>Eits! Login dulu sebelum order ya, tinggal klik tombol di bawah ini</p>
+                <center>
+                    <button id="liff-login" type="button" class="btn btn-success">Log in</button>
+                </center>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -156,6 +161,7 @@
             <!--END OF Konten LIFF v2-->
 
         </div>
+    </div>
 </body>
 
 <script src="nyemil-config.js"></script>

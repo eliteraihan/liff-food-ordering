@@ -70,6 +70,8 @@ var user_statusMessage = "";
  * Initialize the app by calling functions handling individual app components
  */
 function initializeApp() {
+    $('#content').hide();
+    $('#loading').show();
     // hide semua dulu
     initHideAll();
 
@@ -86,6 +88,8 @@ function initializeApp() {
 
     // register terakhir
     registerEventListeners();
+    $('#content').show();
+    $('#loading').hide();
 }
 
 function initHideAll() {
@@ -128,6 +132,7 @@ function getLiffProfile() {
             user_displayName = profile.displayName;
             user_pictureUrl = profile.pictureUrl;
             user_statusMessage = profile.statusMessage;
+            window.alert(`user_pictureUrl = [${user_pictureUrl}] \nuser_displayName = [${user_displayName}]`);
         })
         .catch(function (error) {
             window.alert('Error getting profile: ' + error);
@@ -144,8 +149,6 @@ function putLiffProfile() {
     }
     data += `</p>`;
     data += `<p>Kakak bisa pilih menu di bawah</p>`;
-
-    window.alert(`user_pictureUrl = ${user_pictureUrl} \nuser_displayName = ${user_displayName}`);
     $('#user-profile').html(data);
 }
 
