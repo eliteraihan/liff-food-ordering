@@ -115,9 +115,8 @@ function initHideAll() {
 
 function showLoggedinElements() {
     console.log("showLoggedinElements()...");
-    getLiffProfile();
     $('#loggedin').show();
-    putLiffProfile();
+    getLiffProfile();
     $('#menu-makanan').show();
     $('#menu-minuman').show();
     $('#loggedin-statusMessage').show();
@@ -167,6 +166,7 @@ function getLiffProfile() {
             user_pictureUrl = profile.pictureUrl;
             user_statusMessage = profile.statusMessage;
             console.log(`GET: user_pictureUrl = [${user_pictureUrl}] \nuser_displayName = [${user_displayName}]`);
+            putLiffProfile();
         })
         .catch(function (error) {
             window.alert('Error getting profile: ' + error);
