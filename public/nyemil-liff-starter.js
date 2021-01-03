@@ -74,6 +74,7 @@ function initializeApp() {
         console.log("initializeApp() ...");
 
         if (liff.isLoggedIn()) {
+            console.log("initialize loggedin");
             // kalo udah login, baru inisialisasi
             $('#loading').show();
             showLoggedinElements();
@@ -82,6 +83,7 @@ function initializeApp() {
             $('#not-loggedin').hide();
             $('#loading').hide();
         } else {
+            console.log("initialize not-loggedin")
             // kalo belom login, munculin tombol login aja
             $('#liff-logout').hide();
             $('#not-loggedin').show();
@@ -142,8 +144,9 @@ function initializeLoggedinElements() {
     makanan_id_qty = createKeyValuePairFromArray("fd_", Array(harga_makanan.length), Array(harga_makanan.length).fill(0));
     minuman_id_qty = createKeyValuePairFromArray("bv_", Array(harga_minuman.length), Array(harga_minuman.length).fill(0));
 
-    loadMenu("makanan", makanan_id_qty, nama_makanan, harga_makanan);
-    loadMenu("minuman", minuman_id_qty, nama_minuman, harga_minuman);
+    initMenu("makanan", makanan_id_qty, nama_makanan, harga_makanan);
+    initMenu("minuman", minuman_id_qty, nama_minuman, harga_minuman);
+    initRingkasan();
     // initialization: hide decrement button & qty value
     for (id in makanan_id_qty) {
         $(`#${id}-dec`).hide();

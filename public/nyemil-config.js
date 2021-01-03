@@ -75,7 +75,7 @@ var minuman_id_qty = {};
 //     "2": 9000
 // };
 
-function loadMenu(consumable, id_qty, nama_consumable, harga_consumable) {
+function initMenu(consumable, id_qty, nama_consumable, harga_consumable) {
     let index = 0;
     let menu_string = "menu-" + consumable;
     let list_menu = "";
@@ -111,6 +111,10 @@ function loadMenu(consumable, id_qty, nama_consumable, harga_consumable) {
     } catch (error) {
         alert(error);
     }
+}
+
+function initRingkasan() {
+    ;
 }
 
 function jenisConsumable(consumable) {
@@ -210,10 +214,10 @@ function cekCetakRingkasan(id) {
         list_pesanan = nama_qty_consumable + `IDR ${total_harga.toLocaleString()}`;
 
         data_ringkasan += `${list_pesanan}<br>`;
-        data_ringkasan += `<center>`;
-        // data_ringkasan += `<button id="konfirmasi-pesanan" type="button" class="btn btn-success" onclick="konfirmasiPesanan(${total_harga});">Konfirmasi Pesanan</button>`;
-        data_ringkasan += `<button id="konfirmasi-pesanan" type="button" class="btn btn-success">Konfirmasi Pesanan</button>`;
-        data_ringkasan += `</center>`;
+        // data_ringkasan += `<center>`;
+        // // data_ringkasan += `<button id="konfirmasi-pesanan" type="button" class="btn btn-success" onclick="konfirmasiPesanan(${total_harga});">Konfirmasi Pesanan</button>`;
+        // data_ringkasan += `<button id="konfirmasi-pesanan" type="button" class="btn btn-success">Konfirmasi Pesanan</button>`;
+        // data_ringkasan += `</center>`;
 
         global_data_ringkasan = data_ringkasan;
         global_nama_qty_consumable = nama_qty_consumable;
@@ -226,6 +230,7 @@ function cekCetakRingkasan(id) {
     try {
         // document.getElementById(`ringkasan`).innerHTML = data_ringkasan;
         $(`#ringkasan`).html(data_ringkasan);
+        $(`#konfirmasi-pesanan`).show();
     } catch (error) {
         alert(error);
     }
