@@ -226,9 +226,18 @@ function registerLoggedoutEventListeners() {
     console.log("registerLoggedoutEventListeners() done");
 }
 
+function prosesItemHtmlToPlain(consumable) {
+    let plain = $(`#nama-qty-${consumable}`).html();
+    plain = plain.trim();
+    plain = str.replace(/<p>/g, "");
+    plain = str.replace(/<\/p>/g, "\n");
+
+    return plain;
+}
+
 function konfirmasiPesanan() {
-    global_nama_qty_consumable["makanan"] = $('#nama-qty-makanan').html();
-    global_nama_qty_consumable["minuman"] = $('#nama-qty-minuman').text();
+    global_nama_qty_consumable["makanan"] = prosesItemHtmlToPlain("makanan");
+    global_nama_qty_consumable["minuman"] = prosesItemHtmlToPlain("minuman");
 
     if (liff.isInClient()) {
         let message = `Hai ${user_displayName},
