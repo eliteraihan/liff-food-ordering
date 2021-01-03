@@ -27,6 +27,10 @@ body *:hover {
     min-width: 80%;
 }
 
+#loggedin {
+    min-width: 80%;
+}
+
 #loggedin>div>h2 {
     padding-bottom: 10pt;
 }
