@@ -271,7 +271,7 @@ function konfirmasiPesanan() {
     }
     else {
         let resi = `` +
-            `RECEIPT NO. [${receipt_string}]\n` +
+            `RECEIPT NO. ${receipt_string}\n` +
             `===========\n\n` +
             `Item: \n` +
             `${global_nama_qty_consumable["makanan"]}\n` +
