@@ -176,17 +176,22 @@ function getLiffProfile() {
 function putLiffProfile() {
     console.log("putLiffProfile()...");
     console.log(`GLOBAL: user_pictureUrl = [${user_pictureUrl}] \nuser_displayName = [${user_displayName}]`);
-    let data = `<p>Hi `;
+    let opening = ``;
+    let profile_card = ``;
+
+    profile_card += `<span id="user-profile" class="bold">`;
     if (user_pictureUrl && user_displayName) {
-        data += `<img src="${user_pictureUrl}" alt=""> `;
-        data += `<span id="user-name" class="bold">${user_displayName}</span>!`;
+        profile_card += `<img src="${user_pictureUrl}" alt=""> ${user_displayName}`;
     }
     else {
-        data += `<span class="bold">Customer!</span>`;
+        profile_card += `Customer`;
     }
-    data += `</p>`;
-    data += `<p>Kakak bisa pilih menu di bawah</p>`;
-    $('#user-profile').html(data);
+    profile_card += `</span>`;
+
+    opening += `<p>Hai ${profile_card} !</p>`;
+    opening += `<p>Kakak bisa pilih menu di bawah</p>`;
+
+    $('#opening').html(opening);
     console.log("done");
 }
 

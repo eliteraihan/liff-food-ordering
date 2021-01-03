@@ -65,9 +65,16 @@ tr>th~th {
     padding: 5pt 0 15pt;
 }
 
-img {
-    max-width: 25%;
+p img {
+    max-width: 25pt;
+    border-radius: 25%;
     height: auto;
+}
+
+#user-profile {
+    border: 5pt solid lightskyblue;
+    background-color: lightskyblue;
+    border-radius: 5pt;
 }
 
 .container {
