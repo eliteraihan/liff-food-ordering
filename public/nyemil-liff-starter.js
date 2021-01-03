@@ -195,7 +195,7 @@ function registerEventListeners() {
     console.log("#liff-external");
 
     document.getElementById('konfirmasi-pesanan').addEventListener('click', function () {
-        konfirmasiPesanan();
+        // konfirmasiPesanan();
     });
     console.log("#konfirmasi-pesanan");
     console.log("done");
