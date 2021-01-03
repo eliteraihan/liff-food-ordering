@@ -145,7 +145,6 @@ function initializeLoggedinElements() {
 
     initMenu("makanan", makanan_id_qty, nama_makanan, harga_makanan);
     initMenu("minuman", minuman_id_qty, nama_minuman, harga_minuman);
-    initRingkasan();
     // initialization: hide decrement button & qty value
     for (id in makanan_id_qty) {
         $(`#${id}-dec`).hide();
@@ -155,6 +154,7 @@ function initializeLoggedinElements() {
         $(`#${id}-dec`).hide();
         $(`#${id}-qty`).hide();
     }
+    // initialization: hide #konfirmasi-pesanan button
     console.log("done");
 }
 
@@ -188,7 +188,7 @@ function putLiffProfile() {
     }
     profile_card += `</span>`;
 
-    opening += `<p>Hai ${profile_card} !</p>`;
+    opening += `<p>Hai ${profile_card}</p>`;
     opening += `<p>Kakak bisa pilih menu di bawah</p>`;
 
     $('#opening').html(opening);
@@ -256,6 +256,6 @@ function konfirmasiPesanan() {
             });
     }
     else {
-        alert(`RECEIPT [${(Date.now() % 2097152).toLocaleString()}]\n` + `Total [IDR ${global_total_harga.toLocaleString()}]`);
+        window.alert(`RECEIPT [${(Date.now() % 2097152).toLocaleString()}]\n` + `Total [IDR ${global_total_harga.toLocaleString()}]`);
     }
 }

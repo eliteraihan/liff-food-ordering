@@ -109,12 +109,8 @@ function initMenu(consumable, id_qty, nama_consumable, harga_consumable) {
         $(`#${menu_string}`).html(list_menu);
         // alert("LOADED!");
     } catch (error) {
-        alert(error);
+        window.alert(error);
     }
-}
-
-function initRingkasan() {
-    ;
 }
 
 function jenisConsumable(consumable) {
@@ -173,7 +169,7 @@ function cekCetakQtyJq(id, id_qty) {
         // alert(`id = [${id}]   ||   value = [${id_qty[id]}]   ||   text = [${qty_element.text()}]`);
         cekCetakRingkasan(id);
     } catch (error) {
-        alert(error);
+        window.alert(error);
     }
 }
 
@@ -185,7 +181,7 @@ function isNonZero(kv) {
     try {
         return (Math.max(...Object.values(kv)) > 0) ? true : false;
     } catch (error) {
-        alert(error);
+        window.alert(error);
     }
 }
 
@@ -194,46 +190,44 @@ function cekCetakRingkasan(id) {
     let nama_qty_consumable = "";
     let total_harga = 0;
 
-    if (isNonZero(makanan_id_qty) || isNonZero(minuman_id_qty)) {
-        $(`#ringkasan`).show("fast");
-        data_ringkasan += `<h4>Ringkasan</h4>`;
-
-        for (id in makanan_id_index) {
-            if (makanan_id_qty[id] > 0) {
-                nama_qty_consumable += `${makanan_id_qty[id]} Ã— `;
-                nama_qty_consumable += `${makanan_id_nama[id]}<br>`;
-                total_harga += (makanan_id_qty[id] * makanan_id_harga[id]);
-            }
-        }
-        for (id in minuman_id_index) {
-            if (minuman_id_qty[id] > 0) {
-                nama_qty_consumable += `${minuman_id_qty[id]} Ã— `;
-                nama_qty_consumable += `${minuman_id_nama[id]}<br>`;
-                total_harga += (minuman_id_qty[id] * minuman_id_harga[id]);
-            }
-        }
-        list_pesanan = nama_qty_consumable + `IDR ${total_harga.toLocaleString()}`;
-
-        data_ringkasan += `${list_pesanan}<br>`;
-        // data_ringkasan += `<center>`;
-        // // data_ringkasan += `<button id="konfirmasi-pesanan" type="button" class="btn btn-success" onclick="konfirmasiPesanan(${total_harga});">Konfirmasi Pesanan</button>`;
-        // data_ringkasan += `<button id="konfirmasi-pesanan" type="button" class="btn btn-success">Konfirmasi Pesanan</button>`;
-        // data_ringkasan += `</center>`;
-
-        global_data_ringkasan = data_ringkasan;
-        global_nama_qty_consumable = nama_qty_consumable;
-        global_total_harga = total_harga;
-    }
-    else {
-        $(`#ringkasan`).hide("fast");
-    }
-
     try {
+        if (isNonZero(makanan_id_qty) || isNonZero(minuman_id_qty)) {
+            $(`#ringkasan`).show("fast");
+            data_ringkasan += `<h4>Ringkasan</h4>`;
+
+            for (id in makanan_id_index) {
+                if (makanan_id_qty[id] > 0) {
+                    nama_qty_consumable += `${makanan_id_qty[id]} × `;
+                    nama_qty_consumable += `${makanan_id_nama[id]}<br>`;
+                    total_harga += (makanan_id_qty[id] * makanan_id_harga[id]);
+                }
+            }
+            for (id in minuman_id_index) {
+                if (minuman_id_qty[id] > 0) {
+                    nama_qty_consumable += `${minuman_id_qty[id]} × `;
+                    nama_qty_consumable += `${minuman_id_nama[id]}<br>`;
+                    total_harga += (minuman_id_qty[id] * minuman_id_harga[id]);
+                }
+            }
+            list_pesanan = nama_qty_consumable + `IDR ${total_harga.toLocaleString()}`;
+
+            data_ringkasan += `${list_pesanan}<br>`;
+            $(`#konfirmasi-pesanan`).show();
+
+
+            global_data_ringkasan = data_ringkasan;
+            global_nama_qty_consumable = nama_qty_consumable;
+            global_total_harga = total_harga;
+        }
+        else {
+            $(`#konfirmasi-pesanan`).hide();
+            $(`#ringkasan`).hide("fast");
+        }
+
         // document.getElementById(`ringkasan`).innerHTML = data_ringkasan;
         $(`#ringkasan`).html(data_ringkasan);
-        $(`#konfirmasi-pesanan`).show();
     } catch (error) {
-        alert(error);
+        window.alert(error);
     }
 }
 
