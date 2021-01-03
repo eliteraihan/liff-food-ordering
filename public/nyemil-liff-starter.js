@@ -83,7 +83,7 @@ function initializeApp() {
             $('#not-loggedin').hide();
         } else {
             console.log("initialize not-loggedin")
-            initHideAll();
+            $('#content').hide();
             // kalo belom login, munculin tombol login aja
             $('#liff-logout').hide();
             $('#not-loggedin').show();
@@ -92,7 +92,6 @@ function initializeApp() {
 
         // baru hide semua
         // initHideAll();
-        // $('#content').hide();
 
         // $('#content').show();
         // $('#loading').hide();
@@ -199,12 +198,14 @@ function putLiffProfile() {
 function registerEventListeners() {
     console.log("registerEventListeners() ...");
     document.getElementById('liff-login').addEventListener('click', function () {
+        console.log("#liff-login clicked");
         if (!liff.isLoggedIn()) {
             liff.login();
         }
     });
     console.log("#liff-login");
     document.getElementById('liff-logout').addEventListener('click', function () {
+        console.log("#liff-logout clicked");
         if (liff.isLoggedIn()) {
             liff.logout();
             window.location.reload();
@@ -212,6 +213,7 @@ function registerEventListeners() {
     });
     console.log("#liff-logout");
     document.getElementById('liff-external').addEventListener('click', function () {
+        console.log("#liff-external clicked");
         liff.openWindow({
             url: 'https://eliteraihan-liff-food-ordering.herokuapp.com/',
             external: true  // false: inside LINE app
@@ -220,6 +222,7 @@ function registerEventListeners() {
     console.log("#liff-external");
 
     document.getElementById('konfirmasi-pesanan').addEventListener('click', function () {
+        console.log("#konfirmasi-pesanan clicked");
         konfirmasiPesanan();
     });
     console.log("#konfirmasi-pesanan");
