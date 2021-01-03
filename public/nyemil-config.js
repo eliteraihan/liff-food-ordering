@@ -118,13 +118,14 @@ function jenisConsumable(consumable) {
     // alert((consumable == "minuman") ? "minuman" : "makanan");
     return (consumable == "minuman") ? minuman_id_qty : makanan_id_qty;
 }
-function reverseJenisConsumable(consumable_id_qty) {
-    // alert((consumable_id_qty == minuman_id_qty) ? "minuman" : "makanan");
-    return (consumable_id_qty == minuman_id_qty) ? "minuman" : "makanan";
-}
+// function reverseJenisConsumable(consumable_id_qty) {
+//     // alert((consumable_id_qty == minuman_id_qty) ? "minuman" : "makanan");
+//     return (consumable_id_qty == minuman_id_qty) ? "minuman" : "makanan";
+// }
 
 
 function decrement(id, id_qty) {
+    console.log(`click: ${id}`);
     if (--id_qty[id] <= 0) {
         id_qty[id] = 0;
     }
@@ -132,6 +133,7 @@ function decrement(id, id_qty) {
     cekCetakQtyJq(id, id_qty);
 }
 function increment(id, id_qty) {
+    console.log(`click: ${id}`);
     ++id_qty[id];
     // alert(id_qty[id]);
     cekCetakQtyJq(id, id_qty);
@@ -192,8 +194,9 @@ function cekCetakRingkasan(id) {
 
     try {
         if (isNonZero(makanan_id_qty) || isNonZero(minuman_id_qty)) {
-            data_ringkasan += `<h4>Ringkasan</h4>`;
+            data_ringkasan += `<h4>Ringkasan Pesanan</h4>`;
 
+            nama_qty_consumable += `<h5>Makanan :</h5>`;
             for (id in makanan_id_index) {
                 if (makanan_id_qty[id] > 0) {
                     nama_qty_consumable += `${makanan_id_qty[id]} x `;
@@ -201,6 +204,8 @@ function cekCetakRingkasan(id) {
                     total_harga += (makanan_id_qty[id] * makanan_id_harga[id]);
                 }
             }
+            nama_qty_consumable += `<br>`;
+            nama_qty_consumable += `<h5>Minuman :</h5>`;
             for (id in minuman_id_index) {
                 if (minuman_id_qty[id] > 0) {
                     nama_qty_consumable += `${minuman_id_qty[id]} x `;
@@ -208,9 +213,10 @@ function cekCetakRingkasan(id) {
                     total_harga += (minuman_id_qty[id] * minuman_id_harga[id]);
                 }
             }
-            list_pesanan = nama_qty_consumable + `IDR ${total_harga.toLocaleString()}`;
+            let list_pesanan = `${nama_qty_consumable}<br>`;
+            list_pesanan += `Total : IDR ${total_harga.toLocaleString()}`;
 
-            data_ringkasan += `${list_pesanan}<br>`;
+            data_ringkasan += `${list_pesanan}<br><br>`;
 
             global_data_ringkasan = data_ringkasan;
             global_nama_qty_consumable = nama_qty_consumable;
@@ -226,7 +232,3 @@ function cekCetakRingkasan(id) {
         window.alert(error);
     }
 }
-
-// function konfirmasiPesanan() {
-//     alert(`Invoice order code [${(Date.now() % 2097152).toLocaleString()}]\n` + `Total [IDR ${total_harga.toLocaleString()}]`);
-// }
