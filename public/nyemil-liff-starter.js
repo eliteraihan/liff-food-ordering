@@ -61,9 +61,9 @@ function initializeLiff(myLiffId) {
 }
 
 
-const user_displayName = "";
-const user_pictureUrl = "";
-const user_statusMessage = "";
+var user_displayName = "";
+var user_pictureUrl = "";
+var user_statusMessage = "";
 
 
 /**
