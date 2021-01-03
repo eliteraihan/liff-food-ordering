@@ -178,22 +178,26 @@ function registerEventListeners() {
             liff.login();
         }
     });
+    console.log("#liff-login");
     document.getElementById('liff-logout').addEventListener('click', function () {
         if (liff.isLoggedIn()) {
             liff.logout();
             window.location.reload();
         }
     });
+    console.log("#liff-logout");
     document.getElementById('liff-external').addEventListener('click', function () {
         liff.openWindow({
             url: 'https://eliteraihan-liff-food-ordering.herokuapp.com/',
             external: true  // false: inside LINE app
         });
     });
+    console.log("#liff-external");
 
     document.getElementById('konfirmasi-pesanan').addEventListener('click', function () {
         konfirmasiPesanan();
     });
+    console.log("#konfirmasi-pesanan");
     console.log("done");
 }
 
