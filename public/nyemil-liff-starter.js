@@ -60,6 +60,12 @@ function initializeLiff(myLiffId) {
         });
 }
 
+
+const user_displayName = "";
+const user_pictureUrl = "";
+const user_statusMessage = "";
+
+
 /**
  * Initialize the app by calling functions handling individual app components
  */
@@ -71,7 +77,6 @@ function initializeApp() {
     // and disable inappropriate button.
     if (liff.isLoggedIn()) {
         $(`#not-loggedin`).hide();
-        getLiffProfile();
         showLoggedinElements();
         initializeLoggedinElements();
     } else {
@@ -94,6 +99,7 @@ function initHideAll() {
 }
 
 function showLoggedinElements() {
+    getLiffProfile();
     $('#loggedin').show();
     putLiffProfile();
     $('#menu-makanan').show();
@@ -116,22 +122,21 @@ function initializeLoggedinElements() {
 
 }
 
-var user_name = "";
-var user_pictureUrl = "";
-var user_statusMessage = "";
 function getLiffProfile() {
-    liff.getProfile().then(function (profile) {
-        user_name = profile.displayName;
-        user_pictureUrl = profile.pictureUrl;
-        user_statusMessage = profile.statusMessage;
-    }).catch(function (error) {
-        window.alert('Error getting profile: ' + error);
-    });
+    liff.getProfile()
+        .then(function (profile) {
+            user_displayName = profile.displayName;
+            user_pictureUrl = profile.pictureUrl;
+            user_statusMessage = profile.statusMessage;
+        })
+        .catch(function (error) {
+            window.alert('Error getting profile: ' + error);
+        });
 }
 function putLiffProfile() {
-    let data = `Hi`;
-    data += `<img src="${user_pictureUrl}" alt="user display picture">`;
-    data += `<span id="user-name" class="bold">${user_name}</span>!`;
+    let data = `Hi `;
+    data += `<img src="${user_pictureUrl}" alt="_">`;
+    data += `<span id="user-name" class="bold">${user_displayName}</span>!`;
     data += `<p>Kakak bisa pilih menu di bawah</p>`;
 
     $('#user-profile').html(data);
@@ -160,7 +165,7 @@ function registerEventListeners() {
         if (!liff.isInClient()) {
             konfirmasiPesanan();
         } else {
-            let message = `Hai ${user_name},
+            let message = `Hai ${user_displayName},
 
             Terima kasih telah memesan makanan,
             berikut adalah review pesanannya.
@@ -177,14 +182,17 @@ function registerEventListeners() {
             Mohon ditunggu ya!
             RECEIPT [${(Date.now() % 2097152).toLocaleString()}]`;
 
-            liff.sendMessages([{
-                'type': 'text',
-                'text': message
-            }]).then(function () {
-                window.alert('Resi telah dikirim.');
-            }).catch(function (error) {
-                window.alert('Error sending message: ' + error);
-            });
+            liff
+                .sendMessages([{
+                    'type': 'text',
+                    'text': message
+                }])
+                .then(function () {
+                    window.alert('Resi telah dikirim.');
+                })
+                .catch(function (error) {
+                    window.alert('Error sending message: ' + error);
+                });
         }
     });
 }
