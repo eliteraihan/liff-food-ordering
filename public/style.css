@@ -4,15 +4,15 @@ html {
     text-align: center;
 }
 
-p .normal {
+.normal {
     font-weight: normal;
 }
 
-p .bold {
+.bold {
     font-weight: bold;
 }
 
-p .bolder {
+.bolder {
     font-weight: 900;
 }
 
