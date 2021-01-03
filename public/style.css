@@ -21,10 +21,10 @@ body *:hover {
     border: 1px dashed darkcyan;
 }
 
-main #content {
+#content {
     text-align: left;
     max-width: 400pt;
-    min-width: min-content;
+    min-width: 80%;
 }
 
 #loggedin>div>h2 {
