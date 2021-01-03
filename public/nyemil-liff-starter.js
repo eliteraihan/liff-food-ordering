@@ -244,8 +244,13 @@ function prosesItemHtmlToPlain(consumable) {
 function konfirmasiPesanan() {
     global_nama_qty_consumable["makanan"] = prosesItemHtmlToPlain("makanan");
     global_nama_qty_consumable["minuman"] = prosesItemHtmlToPlain("minuman");
-    let number = Date.now(); // .toLocaleString()
-    let receipt_string = `[${number % 99}-${number % 999}-${number % 999}-${number % 99}]`;
+    let numbers = [
+        getRandomArbitrary(10, 100),
+        getRandomInt(100, 999),
+        getRandomInt(100, 999),
+        getRandomArbitrary(10, 100),
+    ]; // .toLocaleString()
+    let receipt_string = `[${numbers[0]}-${numbers[1]}-${numbers[2]}-${numbers[3]}]`;
 
     if (liff.isInClient()) {
         let message = `` +
