@@ -80,11 +80,9 @@ function initializeApp() {
     try {
         $('#loading').show();
         $('#loggedin-statusMessage').hide();
-        // $('#content').hide();
 
         if (liff.isLoggedIn()) {
             console.log("[loggedin] initializing ...");
-            // showLoggedinElements();
             // kalo udah login, baru inisialisasi
             initializeLoggedinElements();
             registerLoggedinEventListeners();
@@ -102,44 +100,13 @@ function initializeApp() {
             registerLoggedoutEventListeners();
             console.log("[not-loggedin] initialized");
         }
-        // $('#content').show();
-        $('#loading').hide();
 
-        // baru hide semua
-        // initHideAll();
+        $('#loading').hide();
         console.log("initializeApp() done");
     } catch (error) {
         window.alert(error);
     }
 }
-
-// function initHideAll() {
-//     console.log("initHideAll() ...");
-//     $('#loggedin').hide();
-//     $('#menu-makanan').hide();
-//     $('#menu-minuman').hide();
-//     $('#konfirmasi-pesanan').hide();
-//     $('#loggedin-statusMessage').hide();
-//     $('#inApp').hide();
-//     $('#notInApp').hide();
-//     console.log("initHideAll() done");
-// }
-
-// function showLoggedinElements() {
-//     console.log("showLoggedinElements()...");
-//     $('#loggedin').show();
-//     getLiffProfile();
-//     $('#menu-makanan').show();
-//     $('#menu-minuman').show();
-//     $('#loggedin-statusMessage').show();
-//     if (liff.isInClient()) {
-//         $('#notInApp').hide();
-//     }
-//     else {
-//         $('#inApp').hide();
-//     }
-//     console.log("showLoggedinElements() done");
-// }
 
 function initializeLoggedinElements() {
     console.log("initializeLoggedinElements() ...");
