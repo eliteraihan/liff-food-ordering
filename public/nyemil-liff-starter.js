@@ -88,7 +88,7 @@ function initializeApp() {
             // kalo belom login, munculin tombol login aja
             $('#liff-logout').hide();
             $('#not-loggedin').show();
-            console.log("not-loggedin initialized")
+            console.log("not-loggedin initialized");
         }
         $('#content').show();
         $('#loading').hide();
