@@ -239,10 +239,13 @@ function prosesItemHtmlToPlain(consumable) {
 function konfirmasiPesanan() {
     global_nama_qty_consumable["makanan"] = prosesItemHtmlToPlain("makanan");
     global_nama_qty_consumable["minuman"] = prosesItemHtmlToPlain("minuman");
+    let number = Date.now(); // .toLocaleString()
+    let receipt_string = `[${number % 99}-${number % 999}-${number % 999}-${number % 99}]`;
 
     if (liff.isInClient()) {
         let message = `` +
-            `RECEIPT NO. [${(Date.now() % 2097152).toLocaleString()}]\n` +
+            `RECEIPT NO. ${receipt_string}\n` +
+            `===========\n\n` +
             `Hai ${user_displayName},\n\n` +
             `Terima kasih telah memesan makanan,\n` +
             `berikut adalah review pesanannya.\n\n` +
@@ -268,7 +271,8 @@ function konfirmasiPesanan() {
     }
     else {
         let resi = `` +
-            `RECEIPT NO. [${(Date.now() % 2097152).toLocaleString()}]\n\n` +
+            `RECEIPT NO. [${receipt_string}]\n` +
+            `===========\n\n` +
             `Item: \n` +
             `${global_nama_qty_consumable["makanan"]}\n` +
             `${global_nama_qty_consumable["minuman"]}\n\n` +
