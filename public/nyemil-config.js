@@ -274,3 +274,16 @@ function qtyToHtmlString(id, consumable, consumable_id_index, consumable_id_qty,
     };
     // return [ringkasan_html, total_harga];
 }
+
+function lockoutElement(id) {
+    let button = $(`${id}`);
+    var oldValue = button.text();
+
+    button.prop("disabled", true);
+    button.text(`(receipt was sent)`);
+
+    setTimeout(function () {
+        button.text(oldValue);
+        button.prop("disabled", false);
+    }, 3000);
+}

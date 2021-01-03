@@ -1,5 +1,5 @@
 window.onload = function () {
-    console.log("window.onload ...");
+    console.log("(1) window.onload ...");
     const useNodeJS = true;   // Apabila Anda menggunakan node.js Anda dapat mengubah nilai dari useNodeJS menjadi true tanpa mengisi defaultLiffID.
     const defaultLiffId = "";   // Namun apabila tidak menggunakan node.js dan deploy aplikasi ke service seperti Heroku maka Anda dapat mengisinya dengan false dan wajib mengisi defaultLiffID.
     // Anda dapat mengisi defaultLIffId dengan LIFF ID yang terletak pada LIFF URL di channel LIFF LINE Developers yang sudah Anda buat.
@@ -26,7 +26,7 @@ window.onload = function () {
         myLiffId = defaultLiffId;
         initializeLiffOrDie(myLiffId);
     }
-    console.log("window.onload done");
+    console.log("[1] window.onload done");
 };
 
 /**
@@ -34,14 +34,14 @@ window.onload = function () {
 * @param {string} myLiffId The LIFF ID of the selected element
 */
 function initializeLiffOrDie(myLiffId) {
-    console.log("initializeLiffOrDie() ...");
+    console.log("(2) initializeLiffOrDie() ...");
     if (!myLiffId) {
         // document.getElementById("liffAppContent").classList.add('hidden');
         document.getElementById("liffIdErrorMessage").classList.remove('hidden');
     } else {
         initializeLiff(myLiffId);
     }
-    console.log("initializeLiffOrDie() done");
+    console.log("[2] initializeLiffOrDie() done");
 }
 
 /**
@@ -51,7 +51,7 @@ function initializeLiffOrDie(myLiffId) {
 * @param {string} myLiffId The LIFF ID of the selected element
 */
 function initializeLiff(myLiffId) {
-    console.log("initializeLiff() ...");
+    console.log("(3) initializeLiff() ...");
     liff
         .init({
             liffId: myLiffId
@@ -63,7 +63,7 @@ function initializeLiff(myLiffId) {
         .catch((err) => {
             document.getElementById("liffInitErrorMessage").classList.remove('hidden');
         });
-    console.log("initializeLiff() done");
+    console.log("[3] initializeLiff() done");
 }
 
 
@@ -76,7 +76,7 @@ var user_statusMessage = "";
  * Initialize the app by calling functions handling individual app components
  */
 function initializeApp() {
-    console.log("initializeApp() ...");
+    console.log("(4) initializeApp() ...");
     try {
         $('#loading').show();
         $('#loggedin-statusMessage').hide();
@@ -102,7 +102,7 @@ function initializeApp() {
         }
 
         $('#loading').hide();
-        console.log("initializeApp() done");
+        console.log("[4] initializeApp() done");
     } catch (error) {
         window.alert(error);
     }
@@ -256,9 +256,10 @@ function konfirmasiPesanan() {
 
         liff.sendMessages([{
             'type': 'text',
-            'text': `RECEIPT [${(Date.now() % 2097152).toLocaleString()}]`
+            'text': `${message}`
         }])
             .then(function () {
+                lockoutElement(`#konfirmasi-pesanan`);
                 window.alert('Resi telah dikirim.');
             })
             .catch(function (error) {
