@@ -88,6 +88,7 @@ function initializeApp() {
             // kalo udah login, baru inisialisasi
             initializeLoggedinElements();
             registerLoggedinEventListeners();
+            getLiffProfile();
             $('#ringkasan-group').hide();
             $('#loggedin-statusMessage').show();
             $('#not-loggedin').hide();
