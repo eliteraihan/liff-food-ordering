@@ -232,7 +232,7 @@ function registerLoggedinEventListeners() {
 function registerLoggedoutEventListeners() {
     console.log("registerLoggedoutEventListeners() ...");
     document.getElementById('liff-login').addEventListener('click', function () {
-        console.log("#liff-login clicked");
+        console.log("click: #liff-login");
         if (!liff.isLoggedIn()) {
             liff.login();
         }
