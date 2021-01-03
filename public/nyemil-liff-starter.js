@@ -124,7 +124,7 @@ function showLoggedinElements() {
     else {
         $('#notInApp').show();
     }
-    console.log("done");
+    console.log("showLoggedinElements() done");
 }
 function showLoggedoutElements() {
     console.log("showLoggedoutElements()...");
@@ -133,6 +133,7 @@ function showLoggedoutElements() {
 }
 
 function initializeLoggedinElements() {
+    console.log("initializeLoggedinElements()...");
     makanan_id_index = createKeyValuePairFromArray("fd_", [...Array(nama_makanan.length).keys()], Array(nama_makanan.length).fill(0));
     minuman_id_index = createKeyValuePairFromArray("bv_", [...Array(nama_minuman.length).keys()], Array(nama_minuman.length).fill(0));
 
@@ -156,22 +157,26 @@ function initializeLoggedinElements() {
         $(`#${id}-dec`).hide();
         $(`#${id}-qty`).hide();
     }
+    console.log("done");
 }
 
 function getLiffProfile() {
+    console.log("getLiffProfile()...");
     liff.getProfile()
         .then(function (profile) {
             user_displayName = profile.displayName;
             user_pictureUrl = profile.pictureUrl;
             user_statusMessage = profile.statusMessage;
-            window.alert(`GET: user_pictureUrl = [${user_pictureUrl}] \nuser_displayName = [${user_displayName}]`);
+            console.log(`GET: user_pictureUrl = [${user_pictureUrl}] \nuser_displayName = [${user_displayName}]`);
         })
         .catch(function (error) {
             window.alert('Error getting profile: ' + error);
         });
+    console.log("done");
 }
 function putLiffProfile() {
-    window.alert(`GLOBAL: user_pictureUrl = [${user_pictureUrl}] \nuser_displayName = [${user_displayName}]`);
+    console.log("putLiffProfile()...");
+    console.log(`GLOBAL: user_pictureUrl = [${user_pictureUrl}] \nuser_displayName = [${user_displayName}]`);
     let data = `<p>Hi `;
     if (user_pictureUrl && user_displayName) {
         data += `<img src="${user_pictureUrl}" alt=""> `;
@@ -183,6 +188,7 @@ function putLiffProfile() {
     data += `</p>`;
     data += `<p>Kakak bisa pilih menu di bawah</p>`;
     $('#user-profile').html(data);
+    console.log("done");
 }
 
 function registerEventListeners() {
@@ -208,44 +214,44 @@ function registerEventListeners() {
     });
     console.log("#liff-external");
 
-    // document.getElementById('konfirmasi-pesanan').addEventListener('click', function () {
-    //     konfirmasiPesanan();
-    // });
+    document.getElementById('konfirmasi-pesanan').addEventListener('click', function () {
+        konfirmasiPesanan();
+    });
     console.log("#konfirmasi-pesanan");
     console.log("done");
 }
 
-// function konfirmasiPesanan() {
-//     if (liff.isInClient()) {
-//         let message = `Hai ${user_displayName},
+function konfirmasiPesanan() {
+    if (liff.isInClient()) {
+        // let message = `Hai ${user_displayName},
 
-//         Terima kasih telah memesan makanan,
-//         berikut adalah review pesanannya.
+        // Terima kasih telah memesan makanan,
+        // berikut adalah review pesanannya.
 
-//         Item :
-//         ${global_nama_qty_consumable}
+        // Item :
+        // ${global_nama_qty_consumable}
 
-//         Jumlah :
-//         IDR ${global_total_harga.toLocaleString()}
+        // Jumlah :
+        // IDR ${global_total_harga.toLocaleString()}
 
-//         Pesanan kakak akan segera diproses dan
-//         akan diberitahu jika sudah bisa diambil.
+        // Pesanan kakak akan segera diproses dan
+        // akan diberitahu jika sudah bisa diambil.
 
-//         Mohon ditunggu ya!
-//         RECEIPT [${(Date.now() % 2097152).toLocaleString()}]`;
+        // Mohon ditunggu ya!
+        // RECEIPT [${(Date.now() % 2097152).toLocaleString()}]`;
 
-//         liff.sendMessages([{
-//             'type': 'text',
-//             'text': message
-//         }])
-//             .then(function () {
-//                 window.alert('Resi telah dikirim.');
-//             })
-//             .catch(function (error) {
-//                 window.alert('Error sending message: ' + error);
-//             });
-//     }
-//     else {
-//         alert(`RECEIPT [${(Date.now() % 2097152).toLocaleString()}]\n` + `Total [IDR ${global_total_harga.toLocaleString()}]`);
-//     }
-// }
+        liff.sendMessages([{
+            'type': 'text',
+            'text': 'message'
+        }])
+            .then(function () {
+                window.alert('Resi telah dikirim.');
+            })
+            .catch(function (error) {
+                window.alert('Error sending message: ' + error);
+            });
+    }
+    else {
+        alert(`RECEIPT [${(Date.now() % 2097152).toLocaleString()}]\n` + `Total [IDR ${global_total_harga.toLocaleString()}]`);
+    }
+}
