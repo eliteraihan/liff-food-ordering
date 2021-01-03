@@ -56,20 +56,18 @@ function createKeyValuePairFromArray(uid, keys, values, unique = false) {
     }
 }
 
-var makanan_id_index = createKeyValuePairFromArray("fd_", [...Array(nama_makanan.length).keys()], Array(nama_makanan.length).fill(0));
-var minuman_id_index = createKeyValuePairFromArray("bv_", [...Array(nama_minuman.length).keys()], Array(nama_minuman.length).fill(0));
+// initialized later
+var makanan_id_index = {};
+var minuman_id_index = {};
 
-// var makanan_index_id = createKeyValuePairFromArray("", makanan_id_index.values(), makanan_id_index.keys(), true);
-// var minuman_index_id = createKeyValuePairFromArray("", minuman_id_index.values(), minuman_id_index.keys(), true);
+var makanan_id_nama = {};
+var minuman_id_nama = {};
 
-var makanan_id_nama = createKeyValuePairFromArray("fd_", Array(nama_makanan.length), nama_makanan);
-var minuman_id_nama = createKeyValuePairFromArray("bv_", Array(nama_minuman.length), nama_minuman);
+var makanan_id_harga = {};
+var minuman_id_harga = {};
 
-var makanan_id_harga = createKeyValuePairFromArray("fd_", Array(harga_makanan.length), harga_makanan);
-var minuman_id_harga = createKeyValuePairFromArray("bv_", Array(harga_minuman.length), harga_minuman);
-
-var makanan_id_qty = createKeyValuePairFromArray("fd_", Array(harga_makanan.length), Array(harga_makanan.length).fill(0));
-var minuman_id_qty = createKeyValuePairFromArray("bv_", Array(harga_minuman.length), Array(harga_minuman.length).fill(0));
+var makanan_id_qty = {};
+var minuman_id_qty = {};
 
 // const harga_minuman = {
 //     "0": 5000,

@@ -129,9 +129,20 @@ function showLoggedoutElements() {
 }
 
 function initializeLoggedinElements() {
+    makanan_id_index = createKeyValuePairFromArray("fd_", [...Array(nama_makanan.length).keys()], Array(nama_makanan.length).fill(0));
+    minuman_id_index = createKeyValuePairFromArray("bv_", [...Array(nama_minuman.length).keys()], Array(nama_minuman.length).fill(0));
+
+    makanan_id_nama = createKeyValuePairFromArray("fd_", Array(nama_makanan.length), nama_makanan);
+    minuman_id_nama = createKeyValuePairFromArray("bv_", Array(nama_minuman.length), nama_minuman);
+
+    makanan_id_harga = createKeyValuePairFromArray("fd_", Array(harga_makanan.length), harga_makanan);
+    minuman_id_harga = createKeyValuePairFromArray("bv_", Array(harga_minuman.length), harga_minuman);
+
+    makanan_id_qty = createKeyValuePairFromArray("fd_", Array(harga_makanan.length), Array(harga_makanan.length).fill(0));
+    minuman_id_qty = createKeyValuePairFromArray("bv_", Array(harga_minuman.length), Array(harga_minuman.length).fill(0));
+
     loadMenu("makanan", makanan_id_qty, nama_makanan, harga_makanan);
     loadMenu("minuman", minuman_id_qty, nama_minuman, harga_minuman);
-
 }
 
 function getLiffProfile() {
@@ -181,42 +192,42 @@ function registerEventListeners() {
     });
 
     document.getElementById('konfirmasi-pesanan').addEventListener('click', function () {
-        if (!liff.isInClient()) {
-            konfirmasiPesanan();
-        } else {
-            let message = `Hai ${user_displayName},
-
-            Terima kasih telah memesan makanan,
-            berikut adalah review pesanannya.
-
-            Item :
-            ${global_nama_qty_consumable}
-
-            Jumlah :
-            IDR ${global_total_harga.toLocaleString()}
-
-            Pesanan kakak akan segera diproses dan
-            akan diberitahu jika sudah bisa diambil.
-
-            Mohon ditunggu ya!
-            RECEIPT [${(Date.now() % 2097152).toLocaleString()}]`;
-
-            liff
-                .sendMessages([{
-                    'type': 'text',
-                    'text': message
-                }])
-                .then(function () {
-                    window.alert('Resi telah dikirim.');
-                })
-                .catch(function (error) {
-                    window.alert('Error sending message: ' + error);
-                });
-        }
+        konfirmasiPesanan();
     });
     console.log("done");
 }
 
 function konfirmasiPesanan() {
-    alert(`RECEIPT [${(Date.now() % 2097152).toLocaleString()}]\n` + `Total [IDR ${global_total_harga.toLocaleString()}]`);
+    if (liff.isInClient()) {
+        let message = `Hai ${user_displayName},
+
+        Terima kasih telah memesan makanan,
+        berikut adalah review pesanannya.
+
+        Item :
+        ${global_nama_qty_consumable}
+
+        Jumlah :
+        IDR ${global_total_harga.toLocaleString()}
+
+        Pesanan kakak akan segera diproses dan
+        akan diberitahu jika sudah bisa diambil.
+
+        Mohon ditunggu ya!
+        RECEIPT [${(Date.now() % 2097152).toLocaleString()}]`;
+
+        liff.sendMessages([{
+            'type': 'text',
+            'text': message
+        }])
+            .then(function () {
+                window.alert('Resi telah dikirim.');
+            })
+            .catch(function (error) {
+                window.alert('Error sending message: ' + error);
+            });
+    }
+    else {
+        alert(`RECEIPT [${(Date.now() % 2097152).toLocaleString()}]\n` + `Total [IDR ${global_total_harga.toLocaleString()}]`);
+    }
 }
