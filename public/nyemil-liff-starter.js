@@ -84,9 +84,9 @@ function initializeApp() {
         if (liff.isLoggedIn()) {
             console.log("[loggedin] initializing ...");
             // kalo udah login, baru inisialisasi
+            getLiffProfile();
             initializeLoggedinElements();
             registerLoggedinEventListeners();
-            getLiffProfile();
             $('#ringkasan-group').hide();
             $('#loggedin-statusMessage').show();
             $('#not-loggedin').hide();
