@@ -70,28 +70,32 @@ var user_statusMessage = "";
  * Initialize the app by calling functions handling individual app components
  */
 function initializeApp() {
-    console.log("initializeApp() ...");
-    $('#content').hide();
-    $('#loading').show();
-    // hide semua dulu
-    initHideAll();
+    try {
+        console.log("initializeApp() ...");
+        $('#content').hide();
+        $('#loading').show();
+        // hide semua dulu
+        initHideAll();
 
-    // check if the user is logged in OR logged out,
-    // and disable inappropriate button.
-    if (liff.isLoggedIn()) {
-        $(`#not-loggedin`).hide();
-        showLoggedinElements();
-        initializeLoggedinElements();
-    } else {
-        $(`#liff-logout`).hide();
-        showLoggedoutElements()
+        // check if the user is logged in OR logged out,
+        // and disable inappropriate button.
+        if (liff.isLoggedIn()) {
+            $(`#not-loggedin`).hide();
+            showLoggedinElements();
+            initializeLoggedinElements();
+        } else {
+            $(`#liff-logout`).hide();
+            showLoggedoutElements()
+        }
+
+        // register terakhir
+        registerEventListeners();
+        $('#content').show();
+        $('#loading').hide();
+        console.log("initializeApp() done");
+    } catch (error) {
+        window.alert(error);
     }
-
-    // register terakhir
-    registerEventListeners();
-    $('#content').show();
-    $('#loading').hide();
-    console.log("initializeApp() done");
 }
 
 function initHideAll() {
@@ -194,44 +198,44 @@ function registerEventListeners() {
     });
     console.log("#liff-external");
 
-    document.getElementById('konfirmasi-pesanan').addEventListener('click', function () {
-        // konfirmasiPesanan();
-    });
+    // document.getElementById('konfirmasi-pesanan').addEventListener('click', function () {
+    //     konfirmasiPesanan();
+    // });
     console.log("#konfirmasi-pesanan");
     console.log("done");
 }
 
-function konfirmasiPesanan() {
-    if (liff.isInClient()) {
-        let message = `Hai ${user_displayName},
+// function konfirmasiPesanan() {
+//     if (liff.isInClient()) {
+//         let message = `Hai ${user_displayName},
 
-        Terima kasih telah memesan makanan,
-        berikut adalah review pesanannya.
+//         Terima kasih telah memesan makanan,
+//         berikut adalah review pesanannya.
 
-        Item :
-        ${global_nama_qty_consumable}
+//         Item :
+//         ${global_nama_qty_consumable}
 
-        Jumlah :
-        IDR ${global_total_harga.toLocaleString()}
+//         Jumlah :
+//         IDR ${global_total_harga.toLocaleString()}
 
-        Pesanan kakak akan segera diproses dan
-        akan diberitahu jika sudah bisa diambil.
+//         Pesanan kakak akan segera diproses dan
+//         akan diberitahu jika sudah bisa diambil.
 
-        Mohon ditunggu ya!
-        RECEIPT [${(Date.now() % 2097152).toLocaleString()}]`;
+//         Mohon ditunggu ya!
+//         RECEIPT [${(Date.now() % 2097152).toLocaleString()}]`;
 
-        liff.sendMessages([{
-            'type': 'text',
-            'text': message
-        }])
-            .then(function () {
-                window.alert('Resi telah dikirim.');
-            })
-            .catch(function (error) {
-                window.alert('Error sending message: ' + error);
-            });
-    }
-    else {
-        alert(`RECEIPT [${(Date.now() % 2097152).toLocaleString()}]\n` + `Total [IDR ${global_total_harga.toLocaleString()}]`);
-    }
-}
+//         liff.sendMessages([{
+//             'type': 'text',
+//             'text': message
+//         }])
+//             .then(function () {
+//                 window.alert('Resi telah dikirim.');
+//             })
+//             .catch(function (error) {
+//                 window.alert('Error sending message: ' + error);
+//             });
+//     }
+//     else {
+//         alert(`RECEIPT [${(Date.now() % 2097152).toLocaleString()}]\n` + `Total [IDR ${global_total_harga.toLocaleString()}]`);
+//     }
+// }
