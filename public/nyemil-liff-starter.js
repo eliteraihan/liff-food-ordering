@@ -70,6 +70,7 @@ var user_statusMessage = "";
  * Initialize the app by calling functions handling individual app components
  */
 function initializeApp() {
+    console.log("initializeApp() ...");
     $('#content').hide();
     $('#loading').show();
     // hide semua dulu
@@ -90,9 +91,11 @@ function initializeApp() {
     registerEventListeners();
     $('#content').show();
     $('#loading').hide();
+    console.log("initializeApp() done");
 }
 
 function initHideAll() {
+    console.log("initHideAll()...");
     $('#loggedin').hide();
     $('#menu-makanan').hide();
     $('#menu-minuman').hide();
@@ -100,9 +103,11 @@ function initHideAll() {
     $('#loggedin-statusMessage').hide();
     $('#inApp').hide();
     $('#notInApp').hide();
+    console.log("done");
 }
 
 function showLoggedinElements() {
+    console.log("showLoggedinElements()...");
     getLiffProfile();
     $('#loggedin').show();
     putLiffProfile();
@@ -115,9 +120,12 @@ function showLoggedinElements() {
     else {
         $('#notInApp').show();
     }
+    console.log("done");
 }
 function showLoggedoutElements() {
+    console.log("showLoggedoutElements()...");
     $(`#not-loggedin`).show();
+    console.log("done");
 }
 
 function initializeLoggedinElements() {
@@ -153,6 +161,7 @@ function putLiffProfile() {
 }
 
 function registerEventListeners() {
+    console.log("registerEventListeners() ...");
     document.getElementById('liff-login').addEventListener('click', function () {
         if (!liff.isLoggedIn()) {
             liff.login();
@@ -205,6 +214,7 @@ function registerEventListeners() {
                 });
         }
     });
+    console.log("done");
 }
 
 function konfirmasiPesanan() {
