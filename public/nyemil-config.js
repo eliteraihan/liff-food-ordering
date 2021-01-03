@@ -268,9 +268,9 @@ function qtyToHtmlString(id, consumable, consumable_id_index, consumable_id_qty,
         ringkasan_html += `${nama_qty_consumable}<br>`;
     }
 
-    // return {
-    //     ringkasan_html: ringkasan_html,
-    //     total_harga: total_harga,
-    // };
-    return [ringkasan_html, total_harga];
+    return {
+        ringkasan_html: ringkasan_html,
+        total_harga: total_harga,
+    };
+    // return [ringkasan_html, total_harga];
 }
