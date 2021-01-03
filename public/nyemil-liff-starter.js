@@ -134,11 +134,18 @@ function getLiffProfile() {
         });
 }
 function putLiffProfile() {
-    let data = `Hi `;
-    data += `<img src="${user_pictureUrl}" alt="_">`;
-    data += `<span id="user-name" class="bold">${user_displayName}</span>!`;
+    let data = `<p>Hi `;
+    if (user_pictureUrl && user_displayName) {
+        data += `<img src="${user_pictureUrl}" alt=""> `;
+        data += `<span id="user-name" class="bold">${user_displayName}</span>!`;
+    }
+    else {
+        data += `<span class="bold">Customer!</span>`;
+    }
+    data += `</p>`;
     data += `<p>Kakak bisa pilih menu di bawah</p>`;
 
+    window.alert(`user_pictureUrl = ${user_pictureUrl} \nuser_displayName = ${user_displayName}`);
     $('#user-profile').html(data);
 }
 
