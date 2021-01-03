@@ -229,8 +229,13 @@ function cekCetakRingkasan(id) {
         //     ringkasan_html += `${nama_qty_minuman}<br>`;
         // }
 
-        [ringkasan_html, total_harga] += qtyToHtmlString(id, "makanan", makanan_id_index, makanan_id_qty, makanan_id_nama, makanan_id_harga);
-        [ringkasan_html, total_harga] += qtyToHtmlString(id, "minuman", minuman_id_index, minuman_id_qty, minuman_id_nama, minuman_id_harga);
+        let makanan = qtyToHtmlString(id, "makanan", makanan_id_index, makanan_id_qty, makanan_id_nama, makanan_id_harga);
+        let minuman = qtyToHtmlString(id, "minuman", minuman_id_index, minuman_id_qty, minuman_id_nama, minuman_id_harga);
+        ringkasan_html += makanan.ringkasan_html;
+        total_harga += makanan.total_harga;
+        ringkasan_html += minuman.ringkasan_html;
+        total_harga += minuman.total_harga;
+
         ringkasan_html += `<br>Total : IDR ${total_harga.toLocaleString()}`;
 
         global_ringkasan_html = ringkasan_html;
