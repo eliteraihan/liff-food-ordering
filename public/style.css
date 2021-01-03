@@ -16,10 +16,10 @@ html {
     font-weight: 900;
 }
 
-body *:hover {
-    /* style debugger */
+/* style debugger */
+/* body *:hover {
     border: 1px dashed darkcyan;
-}
+} */
 
 #content {
     text-align: left;
