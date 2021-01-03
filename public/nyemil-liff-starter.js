@@ -1,4 +1,5 @@
 window.onload = function () {
+    console.log("window.onload ...");
     const useNodeJS = true;   // Apabila Anda menggunakan node.js Anda dapat mengubah nilai dari useNodeJS menjadi true tanpa mengisi defaultLiffID.
     const defaultLiffId = "";   // Namun apabila tidak menggunakan node.js dan deploy aplikasi ke service seperti Heroku maka Anda dapat mengisinya dengan false dan wajib mengisi defaultLiffID.
     // Anda dapat mengisi defaultLIffId dengan LIFF ID yang terletak pada LIFF URL di channel LIFF LINE Developers yang sudah Anda buat.
@@ -18,13 +19,14 @@ window.onload = function () {
                 initializeLiffOrDie(myLiffId);
             })
             .catch(function (error) {
-                document.getElementById("liffAppContent").classList.add('hidden');
+                // document.getElementById("liffAppContent").classList.add('hidden');
                 document.getElementById("nodeLiffIdErrorMessage").classList.remove('hidden');
             });
     } else {
         myLiffId = defaultLiffId;
         initializeLiffOrDie(myLiffId);
     }
+    console.log("window.onload done");
 };
 
 /**
@@ -32,12 +34,14 @@ window.onload = function () {
 * @param {string} myLiffId The LIFF ID of the selected element
 */
 function initializeLiffOrDie(myLiffId) {
+    console.log("initializeLiffOrDie() ...");
     if (!myLiffId) {
-        document.getElementById("liffAppContent").classList.add('hidden');
+        // document.getElementById("liffAppContent").classList.add('hidden');
         document.getElementById("liffIdErrorMessage").classList.remove('hidden');
     } else {
         initializeLiff(myLiffId);
     }
+    console.log("initializeLiffOrDie() done");
 }
 
 /**
@@ -47,6 +51,7 @@ function initializeLiffOrDie(myLiffId) {
 * @param {string} myLiffId The LIFF ID of the selected element
 */
 function initializeLiff(myLiffId) {
+    console.log("initializeLiff() ...");
     liff
         .init({
             liffId: myLiffId
@@ -58,6 +63,7 @@ function initializeLiff(myLiffId) {
         .catch((err) => {
             document.getElementById("liffInitErrorMessage").classList.remove('hidden');
         });
+    console.log("initializeLiff() done");
 }
 
 
@@ -70,28 +76,30 @@ var user_statusMessage = "";
  * Initialize the app by calling functions handling individual app components
  */
 function initializeApp() {
+    console.log("initializeApp() ...");
     try {
-        console.log("initializeApp() ...");
         $('#loading').show();
+        $('#loggedin-statusMessage').hide();
         // $('#content').hide();
 
         if (liff.isLoggedIn()) {
-            console.log("initialize loggedin ...");
+            console.log("[loggedin] initializing ...");
+            // showLoggedinElements();
             // kalo udah login, baru inisialisasi
-            showLoggedinElements();
             initializeLoggedinElements();
             registerLoggedinEventListeners();
             $('#ringkasan-group').hide();
+            $('#loggedin-statusMessage').show();
             $('#not-loggedin').hide();
-            console.log("loggedin initialized");
+            console.log("[loggedin] initialized");
         } else {
-            console.log("initialize not-loggedin ...")
+            console.log("[not-loggedin] initializing ...")
             $('#loggedin').hide();
             $('#liff-logout').hide();
             // kalo belom login, munculin tombol login aja
             $('#not-loggedin').show();
             registerLoggedoutEventListeners();
-            console.log("not-loggedin initialized");
+            console.log("[not-loggedin] initialized");
         }
         // $('#content').show();
         $('#loading').hide();
@@ -104,36 +112,45 @@ function initializeApp() {
     }
 }
 
-function initHideAll() {
-    console.log("initHideAll()...");
-    $('#loggedin').hide();
-    $('#menu-makanan').hide();
-    $('#menu-minuman').hide();
-    $('#konfirmasi-pesanan').hide();
-    $('#loggedin-statusMessage').hide();
-    $('#inApp').hide();
-    $('#notInApp').hide();
-    console.log("done");
-}
+// function initHideAll() {
+//     console.log("initHideAll() ...");
+//     $('#loggedin').hide();
+//     $('#menu-makanan').hide();
+//     $('#menu-minuman').hide();
+//     $('#konfirmasi-pesanan').hide();
+//     $('#loggedin-statusMessage').hide();
+//     $('#inApp').hide();
+//     $('#notInApp').hide();
+//     console.log("initHideAll() done");
+// }
 
-function showLoggedinElements() {
-    console.log("showLoggedinElements()...");
-    $('#loggedin').show();
-    getLiffProfile();
-    $('#menu-makanan').show();
-    $('#menu-minuman').show();
-    $('#loggedin-statusMessage').show();
-    if (liff.isInClient()) {
-        $('#inApp').show();
-    }
-    else {
-        $('#notInApp').show();
-    }
-    console.log("showLoggedinElements() done");
-}
+// function showLoggedinElements() {
+//     console.log("showLoggedinElements()...");
+//     $('#loggedin').show();
+//     getLiffProfile();
+//     $('#menu-makanan').show();
+//     $('#menu-minuman').show();
+//     $('#loggedin-statusMessage').show();
+//     if (liff.isInClient()) {
+//         $('#notInApp').hide();
+//     }
+//     else {
+//         $('#inApp').hide();
+//     }
+//     console.log("showLoggedinElements() done");
+// }
 
 function initializeLoggedinElements() {
-    console.log("initializeLoggedinElements()...");
+    console.log("initializeLoggedinElements() ...");
+
+    $('#loggedin-statusMessage').show();
+    if (liff.isInClient()) {
+        $('#notInApp').hide();
+    }
+    else {
+        $('#inApp').hide();
+    }
+
     makanan_id_index = createKeyValuePairFromArray("fd_", [...Array(nama_makanan.length).keys()], Array(nama_makanan.length).fill(0));
     minuman_id_index = createKeyValuePairFromArray("bv_", [...Array(nama_minuman.length).keys()], Array(nama_minuman.length).fill(0));
 
@@ -157,12 +174,12 @@ function initializeLoggedinElements() {
         $(`#${id}-dec`).hide();
         $(`#${id}-qty`).hide();
     }
-    // initialization: hide #konfirmasi-pesanan button
-    console.log("done");
+
+    console.log("initializeLoggedinElements() done");
 }
 
 function getLiffProfile() {
-    console.log("getLiffProfile()...");
+    console.log("getLiffProfile() ...");
     liff.getProfile()
         .then(function (profile) {
             user_displayName = profile.displayName;
@@ -174,10 +191,10 @@ function getLiffProfile() {
         .catch(function (error) {
             window.alert('Error getting profile: ' + error);
         });
-    console.log("done");
+    console.log("getLiffProfile() done");
 }
 function putLiffProfile() {
-    console.log("putLiffProfile()...");
+    console.log("putLiffProfile() ...");
     console.log(`GLOBAL: user_pictureUrl = [${user_pictureUrl}] \nuser_displayName = [${user_displayName}]`);
     let opening = ``;
     let profile_card = ``;
@@ -195,7 +212,7 @@ function putLiffProfile() {
     opening += `<p>Kakak bisa pilih menu di bawah</p>`;
 
     $('#opening').html(opening);
-    console.log("done");
+    console.log("putLiffProfile() done");
 }
 
 function registerLoggedinEventListeners() {
@@ -226,7 +243,7 @@ function registerLoggedinEventListeners() {
         konfirmasiPesanan();
     });
     console.log("#konfirmasi-pesanan");
-    console.log("done");
+    console.log("registerEventListeners() done");
 }
 
 function registerLoggedoutEventListeners() {
@@ -238,7 +255,7 @@ function registerLoggedoutEventListeners() {
         }
     });
     console.log("#liff-login");
-    console.log("done");
+    console.log("registerLoggedoutEventListeners() done");
 }
 
 function konfirmasiPesanan() {
