@@ -225,7 +225,7 @@ function cekCetakRingkasan(id) {
             global_total_harga = total_harga;
 
             $('#ringkasan-group').show("fast");
-            $('#ringkasan').html(ringkasan_html);
+            $('#ringkasan-string').html(ringkasan_html);
         }
         else {
             $('#ringkasan-group').hide("fast");
