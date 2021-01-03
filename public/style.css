@@ -23,7 +23,7 @@ body *:hover {
 
 #content {
     text-align: left;
-    width: 95%;
+    width: 98%;
     max-width: 500px;
     margin: 25px auto 25px;
 }
@@ -35,7 +35,7 @@ body *:hover {
 #loggedin {
     margin: auto;
     width: inherit;
-    max-width: 95%;
+    max-width: 99%;
 }
 
 #loggedin>div>h2 {
