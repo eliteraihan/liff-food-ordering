@@ -209,7 +209,7 @@ function registerLoggedinEventListeners() {
     document.getElementById('konfirmasi-pesanan').addEventListener('click', function () {
         console.log("click: #konfirmasi-pesanan");
         if (liff.isInClient()) {
-            lockoutElement(`#konfirmasi-pesanan`);;
+            lockoutElement(`#konfirmasi-pesanan`);
         }
         konfirmasiPesanan();
     });
