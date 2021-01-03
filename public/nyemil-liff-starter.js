@@ -81,7 +81,6 @@ function initializeApp() {
             initializeLoggedinElements();
             registerEventListeners();
             $('#not-loggedin').hide();
-            $('#loading').hide();
         } else {
             console.log("initialize not-loggedin")
             initHideAll();
@@ -89,6 +88,7 @@ function initializeApp() {
             $('#liff-logout').hide();
             $('#not-loggedin').show();
         }
+        $('#loading').hide();
 
         // baru hide semua
         // initHideAll();
