@@ -236,7 +236,7 @@ function cekCetakRingkasan(id) {
         ringkasan_html += minuman.ringkasan_html;
         total_harga += minuman.total_harga;
 
-        ringkasan_html += `<br>Total : IDR ${total_harga.toLocaleString()}`;
+        ringkasan_html += `<br>Total : <span class="bold">IDR ${total_harga.toLocaleString()}</span><br>`;
 
         global_ringkasan_html = ringkasan_html;
         global_total_harga = total_harga;

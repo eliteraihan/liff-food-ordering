@@ -227,7 +227,7 @@ function registerLoggedoutEventListeners() {
 }
 
 function konfirmasiPesanan() {
-    global_nama_qty_consumable["makanan"] = $('#nama-qty-makanan').text();
+    global_nama_qty_consumable["makanan"] = $('#nama-qty-makanan').html();
     global_nama_qty_consumable["minuman"] = $('#nama-qty-minuman').text();
 
     if (liff.isInClient()) {
