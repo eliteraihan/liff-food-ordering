@@ -89,7 +89,7 @@ function loadMenu(consumable, id_qty, nama_consumable, harga_consumable) {
         // nama
         list_menu += `<tr>`;
         list_menu += `<th>${nama_consumable[index]}</th>`;
-        list_menu += `<th><button id="${id}-dec" class="btn btn-secondary" onclick="decrement(${onclick_string}")">-</button></th>`;  // versi button
+        list_menu += `<th><button id="${id}-dec" class="btn btn-secondary" onclick="decrement(${onclick_string})">-</button></th>`;  // versi button
         // list_menu += `<th><a class="btn btn-secondary" href="javascript:void(0)" onclick="decrement(${onclick_string})">-</a></th>`;     // versi anchor
         list_menu += `<th><span id="${id}-qty" class="width-qty"></span></th>`;
         list_menu += `<th><button id="${id}-inc" class="btn btn-success" onclick="increment(${onclick_string})">+</button></th>`;
@@ -103,12 +103,6 @@ function loadMenu(consumable, id_qty, nama_consumable, harga_consumable) {
         ++index;
     }
     list_menu += `</table>`;
-
-    // initialization: hide decrement button & qty value
-    for (id in id_qty) {
-        $(`#${id}-dec`).hide();
-        $(`#${id}-qty`).hide();
-    }
 
     try {
         // document.getElementById(menu_string).innerHTML = list_menu;

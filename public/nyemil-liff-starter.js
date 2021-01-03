@@ -147,6 +147,15 @@ function initializeLoggedinElements() {
 
     loadMenu("makanan", makanan_id_qty, nama_makanan, harga_makanan);
     loadMenu("minuman", minuman_id_qty, nama_minuman, harga_minuman);
+    // initialization: hide decrement button & qty value
+    for (id in makanan_id_qty) {
+        $(`#${id}-dec`).hide();
+        $(`#${id}-qty`).hide();
+    }
+    for (id in minuman_id_qty) {
+        $(`#${id}-dec`).hide();
+        $(`#${id}-qty`).hide();
+    }
 }
 
 function getLiffProfile() {
@@ -155,13 +164,14 @@ function getLiffProfile() {
             user_displayName = profile.displayName;
             user_pictureUrl = profile.pictureUrl;
             user_statusMessage = profile.statusMessage;
-            window.alert(`user_pictureUrl = [${user_pictureUrl}] \nuser_displayName = [${user_displayName}]`);
+            window.alert(`GET: user_pictureUrl = [${user_pictureUrl}] \nuser_displayName = [${user_displayName}]`);
         })
         .catch(function (error) {
             window.alert('Error getting profile: ' + error);
         });
 }
 function putLiffProfile() {
+    window.alert(`GLOBAL: user_pictureUrl = [${user_pictureUrl}] \nuser_displayName = [${user_displayName}]`);
     let data = `<p>Hi `;
     if (user_pictureUrl && user_displayName) {
         data += `<img src="${user_pictureUrl}" alt=""> `;
