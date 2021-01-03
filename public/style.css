@@ -66,15 +66,15 @@ tr>th~th {
 }
 
 p img {
-    max-width: 25pt;
+    max-width: 20pt;
     border-radius: 25%;
     height: auto;
 }
 
 #user-profile {
-    border: 5pt solid lightskyblue;
+    border: 8pt solid lightskyblue;
     background-color: lightskyblue;
-    border-radius: 5pt;
+    border-radius: 10pt;
 }
 
 .container {
