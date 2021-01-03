@@ -8,8 +8,8 @@ const harga_minuman = [1000, 2000, 4000];
 
 var global_i = 0;
 
-var global_data_ringkasan = ``;
-var global_nama_qty_consumable = "";
+var global_ringkasan_string = ``;
+var global_nama_qty_consumable = {};
 var global_total_harga = 0;
 
 /**
@@ -188,15 +188,16 @@ function isNonZero(kv) {
 }
 
 function cekCetakRingkasan(id) {
-    let data_ringkasan = ``;
+    let ringkasan_string = ``;
     let nama_qty_consumable = "";
     let total_harga = 0;
 
     try {
         if (isNonZero(makanan_id_qty) || isNonZero(minuman_id_qty)) {
-            data_ringkasan += `<h4>Ringkasan Pesanan</h4>`;
+            ringkasan_html += `<h4>Ringkasan Pesanan</h4>`;
 
-            nama_qty_consumable += `<h5>Makanan :</h5>`;
+            ringkasan_html += `<h5>Makanan :</h5>`;
+            nama_qty_consumable += `<div id="nama-qty-makanan">`;
             for (id in makanan_id_index) {
                 if (makanan_id_qty[id] > 0) {
                     nama_qty_consumable += `${makanan_id_qty[id]} x `;
@@ -204,8 +205,11 @@ function cekCetakRingkasan(id) {
                     total_harga += (makanan_id_qty[id] * makanan_id_harga[id]);
                 }
             }
-            nama_qty_consumable += `<br>`;
-            nama_qty_consumable += `<h5>Minuman :</h5>`;
+            nama_qty_consumable += `</div>`;
+            ringkasan_html += `${nama_qty_consumable}<br>`;
+
+            ringkasan_html += `<h5>Minuman :</h5>`;
+            nama_qty_consumable += `<div id="nama-qty-minuman">`;
             for (id in minuman_id_index) {
                 if (minuman_id_qty[id] > 0) {
                     nama_qty_consumable += `${minuman_id_qty[id]} x `;
@@ -213,17 +217,15 @@ function cekCetakRingkasan(id) {
                     total_harga += (minuman_id_qty[id] * minuman_id_harga[id]);
                 }
             }
-            let list_pesanan = `${nama_qty_consumable}<br>`;
-            list_pesanan += `Total : IDR ${total_harga.toLocaleString()}`;
+            nama_qty_consumable += `</div>`;
+            ringkasan_html += `${nama_qty_consumable}<br><br>`;
+            ringkasan_html += `Total : IDR ${total_harga.toLocaleString()}`;
 
-            data_ringkasan += `${list_pesanan}<br><br>`;
-
-            global_data_ringkasan = data_ringkasan;
-            global_nama_qty_consumable = nama_qty_consumable;
+            global_ringkasan_html = ringkasan_html;
             global_total_harga = total_harga;
 
             $('#ringkasan-group').show("fast");
-            $('#ringkasan').html(data_ringkasan);
+            $('#ringkasan').html(ringkasan_html);
         }
         else {
             $('#ringkasan-group').hide("fast");

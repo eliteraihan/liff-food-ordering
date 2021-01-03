@@ -227,27 +227,31 @@ function registerLoggedoutEventListeners() {
 }
 
 function konfirmasiPesanan() {
+    global_nama_qty_consumable["makanan"] = $('#nama-qty-makanan').text();
+    global_nama_qty_consumable["minuman"] = $('#nama-qty-minuman').text();
+
     if (liff.isInClient()) {
-        // let message = `Hai ${user_displayName},
+        let message = `Hai ${user_displayName},
 
-        // Terima kasih telah memesan makanan,
-        // berikut adalah review pesanannya.
+        Terima kasih telah memesan makanan,
+        berikut adalah review pesanannya.
 
-        // Item :
-        // ${global_nama_qty_consumable}
+        Item :
+        ${global_nama_qty_consumable["makanan"]}
+        ${global_nama_qty_consumable["minuman"]}
 
-        // Jumlah :
-        // IDR ${global_total_harga.toLocaleString()}
+        Jumlah :
+        IDR ${global_total_harga.toLocaleString()}
 
-        // Pesanan kakak akan segera diproses dan
-        // akan diberitahu jika sudah bisa diambil.
+        Pesanan kakak akan segera diproses dan
+        akan diberitahu jika sudah bisa diambil.
 
-        // Mohon ditunggu ya!
-        // RECEIPT [${(Date.now() % 2097152).toLocaleString()}]`;
+        Mohon ditunggu ya!
+        RECEIPT [${(Date.now() % 2097152).toLocaleString()}]`;
 
         liff.sendMessages([{
             'type': 'text',
-            'text': 'message'
+            'text': message
         }])
             .then(function () {
                 window.alert('Resi telah dikirim.');
@@ -257,6 +261,14 @@ function konfirmasiPesanan() {
             });
     }
     else {
-        window.alert(`RECEIPT [${(Date.now() % 2097152).toLocaleString()}]\n` + `Total [IDR ${global_total_harga.toLocaleString()}]`);
+        let resi = `RECEIPT [${(Date.now() % 2097152).toLocaleString()}]
+
+        Item :
+        ${global_nama_qty_consumable["makanan"]}
+        ${global_nama_qty_consumable["minuman"]}
+
+        Total [IDR ${global_total_harga.toLocaleString()}]`;
+
+        window.alert(resi);
     }
 }
