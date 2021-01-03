@@ -72,22 +72,23 @@ var user_statusMessage = "";
 function initializeApp() {
     try {
         console.log("initializeApp() ...");
+        $('#loading').show();
         $('#content').hide();
 
         if (liff.isLoggedIn()) {
-            console.log("initialize loggedin");
+            console.log("initialize loggedin ...");
             // kalo udah login, baru inisialisasi
-            $('#loading').show();
             showLoggedinElements();
             initializeLoggedinElements();
-            registerEventListeners();
+            registerLoggedinEventListeners();
             $('#not-loggedin').hide();
-            console.log("initialize loggedin");
+            console.log("loggedin initialized");
         } else {
-            console.log("not-loggedin initialized")
+            console.log("initialize not-loggedin ...")
             // kalo belom login, munculin tombol login aja
             $('#liff-logout').hide();
             $('#not-loggedin').show();
+            registerLoggedoutEventListeners();
             console.log("not-loggedin initialized");
         }
         $('#content').show();
@@ -195,8 +196,39 @@ function putLiffProfile() {
     console.log("done");
 }
 
-function registerEventListeners() {
+function registerLoggedinEventListeners() {
     console.log("registerEventListeners() ...");
+    if (liff.isInClient()) {
+        document.getElementById('liff-external').addEventListener('click', function () {
+            console.log("click: #liff-external");
+            liff.openWindow({
+                url: 'https://eliteraihan-liff-food-ordering.herokuapp.com/',
+                external: true  // false: inside LINE app
+            });
+        });
+        console.log("#liff-external");
+    }
+    else {
+        document.getElementById('liff-logout').addEventListener('click', function () {
+            console.log("click: #liff-logout");
+            if (liff.isLoggedIn()) {
+                liff.logout();
+                window.location.reload();
+            }
+        });
+        console.log("#liff-logout");
+    }
+
+    document.getElementById('konfirmasi-pesanan').addEventListener('click', function () {
+        console.log("click: #konfirmasi-pesanan");
+        konfirmasiPesanan();
+    });
+    console.log("#konfirmasi-pesanan");
+    console.log("done");
+}
+
+function registerLoggedoutEventListeners() {
+    console.log("registerLoggedoutEventListeners() ...");
     document.getElementById('liff-login').addEventListener('click', function () {
         console.log("#liff-login clicked");
         if (!liff.isLoggedIn()) {
@@ -204,28 +236,6 @@ function registerEventListeners() {
         }
     });
     console.log("#liff-login");
-    document.getElementById('liff-logout').addEventListener('click', function () {
-        console.log("#liff-logout clicked");
-        if (liff.isLoggedIn()) {
-            liff.logout();
-            window.location.reload();
-        }
-    });
-    console.log("#liff-logout");
-    document.getElementById('liff-external').addEventListener('click', function () {
-        console.log("#liff-external clicked");
-        liff.openWindow({
-            url: 'https://eliteraihan-liff-food-ordering.herokuapp.com/',
-            external: true  // false: inside LINE app
-        });
-    });
-    console.log("#liff-external");
-
-    document.getElementById('konfirmasi-pesanan').addEventListener('click', function () {
-        console.log("#konfirmasi-pesanan clicked");
-        konfirmasiPesanan();
-    });
-    console.log("#konfirmasi-pesanan");
     console.log("done");
 }
 
