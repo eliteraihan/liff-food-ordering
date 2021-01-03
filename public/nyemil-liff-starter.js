@@ -72,6 +72,7 @@ var user_statusMessage = "";
 function initializeApp() {
     try {
         console.log("initializeApp() ...");
+        $('#content').hide();
 
         if (liff.isLoggedIn()) {
             console.log("initialize loggedin");
@@ -81,20 +82,19 @@ function initializeApp() {
             initializeLoggedinElements();
             registerEventListeners();
             $('#not-loggedin').hide();
+            console.log("initialize loggedin");
         } else {
-            console.log("initialize not-loggedin")
-            $('#content').hide();
+            console.log("not-loggedin initialized")
             // kalo belom login, munculin tombol login aja
             $('#liff-logout').hide();
             $('#not-loggedin').show();
+            console.log("not-loggedin initialized")
         }
+        $('#content').show();
         $('#loading').hide();
 
         // baru hide semua
         // initHideAll();
-
-        // $('#content').show();
-        // $('#loading').hide();
         console.log("initializeApp() done");
     } catch (error) {
         window.alert(error);
