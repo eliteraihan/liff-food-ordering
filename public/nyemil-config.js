@@ -229,8 +229,8 @@ function cekCetakRingkasan(id) {
         //     ringkasan_html += `${nama_qty_minuman}<br>`;
         // }
 
-        ringkasan_html += qtyToHtmlString(id, "makanan", makanan_id_qty, makanan_id_nama, makanan_id_harga);
-        ringkasan_html += qtyToHtmlString(id, "minuman", minuman_id_qty, minuman_id_nama, minuman_id_harga);
+        ringkasan_html += qtyToHtmlString(id, "makanan", makanan_id_index, makanan_id_qty, makanan_id_nama, makanan_id_harga);
+        ringkasan_html += qtyToHtmlString(id, "minuman", minuman_id_index, minuman_id_qty, minuman_id_nama, minuman_id_harga);
         ringkasan_html += `<br>Total : IDR ${total_harga.toLocaleString()}`;
 
         global_ringkasan_html = ringkasan_html;
@@ -243,7 +243,7 @@ function cekCetakRingkasan(id) {
     }
 }
 
-function qtyToHtmlString(id, consumable, consumable_id_qty, consumable_id_nama, consumable_id_harga) {
+function qtyToHtmlString(id, consumable, consumable_id_index, consumable_id_qty, consumable_id_nama, consumable_id_harga) {
     let ringkasan_html = ``;
     let nama_qty_consumable = ``;
     let consumable_header = (consumable == "makanan") ? "Makanan" : "Minuman";
