@@ -84,6 +84,7 @@ function initializeApp() {
             $('#loading').hide();
         } else {
             console.log("initialize not-loggedin")
+            initHideAll();
             // kalo belom login, munculin tombol login aja
             $('#liff-logout').hide();
             $('#not-loggedin').show();
@@ -106,7 +107,7 @@ function initHideAll() {
     $('#loggedin').hide();
     $('#menu-makanan').hide();
     $('#menu-minuman').hide();
-    $('#ringkasan').hide();
+    $('#konfirmasi-pesanan').hide();
     $('#loggedin-statusMessage').hide();
     $('#inApp').hide();
     $('#notInApp').hide();
