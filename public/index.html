@@ -77,7 +77,7 @@
     <footer>
         <div id="liffErrors" class="card center-block">
             <!-- LIFF ID ERROR -->
-            <div id="liffIdErrorMessage" class="hidden">
+            <div id="liffIdErrorMessage" class="card hidden">
                 <p>You have not assigned any value for LIFF ID.</p>
                 <p>If you are running the app using Node.js, please set the LIFF ID as an environment variable in
                     your
@@ -100,19 +100,19 @@
             </div>
 
             <!-- LIFF INIT ERROR -->
-            <div id="liffInitErrorMessage" class="hidden">
+            <div id="liffInitErrorMessage" class="card hidden">
                 <p>Something went wrong with LIFF initialization.</p>
                 <p>LIFF initialization can fail if a user clicks "Cancel" on the "Grant permission" screen, or if an
                     error occurs in the process of <code>liff.init()</code>.</p>
             </div>
 
             <!-- NODE.JS LIFF ID ERROR -->
-            <div id="nodeLiffIdErrorMessage" class="hidden">
+            <div id="nodeLiffIdErrorMessage" class="card hidden">
                 <p>Unable to receive the LIFF ID as an environment variable.</p>
             </div>
         </div>
 
-        <div>
+        <div class="card">
             <a href="https://github.com/eliteraihan/liff-food-ordering" target="_blank" rel="noopener noreferrer">Source
                 code</a>
         </div>
