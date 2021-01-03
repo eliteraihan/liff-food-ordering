@@ -208,8 +208,8 @@ function registerLoggedinEventListeners() {
 
     document.getElementById('konfirmasi-pesanan').addEventListener('click', function () {
         console.log("click: #konfirmasi-pesanan");
-        lockoutElement(`#konfirmasi-pesanan`);
         konfirmasiPesanan();
+        lockoutElement(`#konfirmasi-pesanan`);
     });
     console.log("#konfirmasi-pesanan");
     console.log("registerEventListeners() done");
@@ -272,7 +272,7 @@ function konfirmasiPesanan() {
             `Item: \n` +
             `${global_nama_qty_consumable["makanan"]}\n` +
             `${global_nama_qty_consumable["minuman"]}\n\n` +
-            `Total[IDR ${global_total_harga.toLocaleString()}]`;
+            `Total [IDR ${global_total_harga.toLocaleString()}]`;
 
         window.alert(resi);
     }
