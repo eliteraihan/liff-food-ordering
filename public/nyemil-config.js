@@ -205,13 +205,12 @@ function cekCetakRingkasan(id) {
             nama_qty_consumable += `<div id="nama-qty-makanan">`;
             for (id in makanan_id_index) {
                 if (makanan_id_qty[id] > 0) {
-                    nama_qty_consumable += `$<p>{makanan_id_qty[id]} x `;
+                    nama_qty_consumable += `<p>${makanan_id_qty[id]} x `;
                     nama_qty_consumable += `${makanan_id_nama[id]}</p>`;
                     total_harga += (makanan_id_qty[id] * makanan_id_harga[id]);
                 }
             }
-            nama_qty_consumable += `</div>`;
-            ringkasan_html += `${nama_qty_consumable}<br>`;
+            nama_qty_consumable += `</div><br>`;
         }
 
         if (isNonZero(minuman_id_qty)) {
@@ -225,9 +224,8 @@ function cekCetakRingkasan(id) {
                 }
             }
             nama_qty_consumable += `</div>`;
-            ringkasan_html += `${nama_qty_consumable}<br>`;
         }
-
+        ringkasan_html += `${nama_qty_consumable}<br>`;
         ringkasan_html += `<br>Total : IDR ${total_harga.toLocaleString()}`;
         global_ringkasan_html = ringkasan_html;
         global_total_harga = total_harga;
