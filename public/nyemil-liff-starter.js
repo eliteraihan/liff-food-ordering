@@ -208,6 +208,7 @@ function registerLoggedinEventListeners() {
 
     document.getElementById('konfirmasi-pesanan').addEventListener('click', function () {
         console.log("click: #konfirmasi-pesanan");
+        lockoutElement(`#konfirmasi-pesanan`);
         konfirmasiPesanan();
     });
     console.log("#konfirmasi-pesanan");
@@ -241,25 +242,24 @@ function konfirmasiPesanan() {
 
     if (liff.isInClient()) {
         let message = `` +
+            `RECEIPT NO. [${(Date.now() % 2097152).toLocaleString()}]\n` +
             `Hai ${user_displayName},\n\n` +
             `Terima kasih telah memesan makanan,\n` +
             `berikut adalah review pesanannya.\n\n` +
             `Item :\n` +
             `${global_nama_qty_consumable["makanan"]}` +
-            `${global_nama_qty_consumable["minuman"]}\n\n` +
+            `${global_nama_qty_consumable["minuman"]}\n` +
             `Jumlah :\n` +
             `IDR ${global_total_harga.toLocaleString()}\n\n` +
             `Pesanan kakak akan segera diproses dan\n` +
             `akan diberitahu jika sudah bisa diambil.\n\n` +
-            `Mohon ditunggu ya!\n` +
-            `RECEIPT [${(Date.now() % 2097152).toLocaleString()}]`;
+            `Mohon ditunggu ya!`;
 
         liff.sendMessages([{
             'type': 'text',
             'text': `${message}`
         }])
             .then(function () {
-                lockoutElement(`#konfirmasi-pesanan`);
                 window.alert('Resi telah dikirim.');
             })
             .catch(function (error) {
@@ -268,11 +268,11 @@ function konfirmasiPesanan() {
     }
     else {
         let resi = `` +
-            `RECEIPT [${(Date.now() % 2097152).toLocaleString()}]\n\n` +
-            `Item :\n` +
+            `RECEIPT NO. [${(Date.now() % 2097152).toLocaleString()}]\n\n` +
+            `Item: \n` +
             `${global_nama_qty_consumable["makanan"]}\n` +
             `${global_nama_qty_consumable["minuman"]}\n\n` +
-            `Total [IDR ${global_total_harga.toLocaleString()}]`;
+            `Total[IDR ${global_total_harga.toLocaleString()}]`;
 
         window.alert(resi);
     }

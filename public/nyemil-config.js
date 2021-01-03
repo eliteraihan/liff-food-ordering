@@ -275,6 +275,9 @@ function qtyToHtmlString(id, consumable, consumable_id_index, consumable_id_qty,
     // return [ringkasan_html, total_harga];
 }
 
+/**
+ * https://stackoverflow.com/questions/10593062/how-do-i-temporarily-disable-a-submit-button-for-3-seconds-onsubmit-then-re-e
+ */
 function lockoutElement(id) {
     let button = $(`${id}`);
     var oldValue = button.text();
