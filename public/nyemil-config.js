@@ -193,43 +193,47 @@ function cekCetakRingkasan(id) {
     let total_harga = 0;
 
     try {
-        if (isNonZero(makanan_id_qty) || isNonZero(minuman_id_qty)) {
-            ringkasan_html += `<h4>Ringkasan Pesanan</h4>`;
+        if (!isNonZero(makanan_id_qty) && !isNonZero(minuman_id_qty)) {
+            $('#ringkasan-group').hide("fast");
+            return;
+        } else {
+            ringkasan_html += `<h4 class="bold">Ringkasan Pesanan</h4>`;
+        }
 
-            ringkasan_html += `<h5>Makanan :</h5>`;
+        if (isNonZero(makanan_id_qty)) {
+            ringkasan_html += `<h5 class="bold">Makanan :</h5>`;
             nama_qty_consumable += `<div id="nama-qty-makanan">`;
             for (id in makanan_id_index) {
                 if (makanan_id_qty[id] > 0) {
-                    nama_qty_consumable += `${makanan_id_qty[id]} x `;
-                    nama_qty_consumable += `${makanan_id_nama[id]}<br>`;
+                    nama_qty_consumable += `$<p>{makanan_id_qty[id]} x `;
+                    nama_qty_consumable += `${makanan_id_nama[id]}</p>`;
                     total_harga += (makanan_id_qty[id] * makanan_id_harga[id]);
                 }
             }
             nama_qty_consumable += `</div>`;
             ringkasan_html += `${nama_qty_consumable}<br>`;
+        }
 
-            ringkasan_html += `<h5>Minuman :</h5>`;
+        if (isNonZero(minuman_id_qty)) {
+            ringkasan_html += `<h5 class="bold">Minuman :</h5>`;
             nama_qty_consumable += `<div id="nama-qty-minuman">`;
             for (id in minuman_id_index) {
                 if (minuman_id_qty[id] > 0) {
-                    nama_qty_consumable += `${minuman_id_qty[id]} x `;
-                    nama_qty_consumable += `${minuman_id_nama[id]}<br>`;
+                    nama_qty_consumable += `<p>${minuman_id_qty[id]} x `;
+                    nama_qty_consumable += `${minuman_id_nama[id]}</p>`;
                     total_harga += (minuman_id_qty[id] * minuman_id_harga[id]);
                 }
             }
             nama_qty_consumable += `</div>`;
-            ringkasan_html += `${nama_qty_consumable}<br><br>`;
-            ringkasan_html += `Total : IDR ${total_harga.toLocaleString()}`;
-
-            global_ringkasan_html = ringkasan_html;
-            global_total_harga = total_harga;
-
-            $('#ringkasan-group').show("fast");
-            $('#ringkasan-string').html(ringkasan_html);
+            ringkasan_html += `${nama_qty_consumable}<br>`;
         }
-        else {
-            $('#ringkasan-group').hide("fast");
-        }
+
+        ringkasan_html += `<br>Total : IDR ${total_harga.toLocaleString()}`;
+        global_ringkasan_html = ringkasan_html;
+        global_total_harga = total_harga;
+
+        $('#ringkasan-group').show("fast");
+        $('#ringkasan-string').html(ringkasan_html);
     } catch (error) {
         window.alert(error);
     }
