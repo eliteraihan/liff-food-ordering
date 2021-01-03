@@ -72,26 +72,27 @@ var user_statusMessage = "";
 function initializeApp() {
     try {
         console.log("initializeApp() ...");
-        $('#content').hide();
-        $('#loading').show();
-        // hide semua dulu
-        initHideAll();
 
-        // check if the user is logged in OR logged out,
-        // and disable inappropriate button.
         if (liff.isLoggedIn()) {
-            $(`#not-loggedin`).hide();
+            // kalo udah login, baru inisialisasi
+            $('#loading').show();
             showLoggedinElements();
             initializeLoggedinElements();
+            registerEventListeners();
+            $('#not-loggedin').hide();
+            $('#loading').hide();
         } else {
-            $(`#liff-logout`).hide();
-            showLoggedoutElements()
+            // kalo belom login, munculin tombol login aja
+            $('#liff-logout').hide();
+            $('#not-loggedin').show();
         }
 
-        // register terakhir
-        registerEventListeners();
-        $('#content').show();
-        $('#loading').hide();
+        // baru hide semua
+        // initHideAll();
+        // $('#content').hide();
+
+        // $('#content').show();
+        // $('#loading').hide();
         console.log("initializeApp() done");
     } catch (error) {
         window.alert(error);
@@ -125,11 +126,6 @@ function showLoggedinElements() {
         $('#notInApp').show();
     }
     console.log("showLoggedinElements() done");
-}
-function showLoggedoutElements() {
-    console.log("showLoggedoutElements()...");
-    $(`#not-loggedin`).show();
-    console.log("done");
 }
 
 function initializeLoggedinElements() {
