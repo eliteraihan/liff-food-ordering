@@ -141,20 +141,20 @@ function increment(id, id_qty) {
     cekCetakQtyJq(id, id_qty);
 }
 
-function cekCetakQty(id, id_qty) {
-    let qty_element = document.getElementById(`${id}-qty`);
-    let dec_button = document.getElementById(`${id}-dec`);
+// function cekCetakQty(id, id_qty) {
+//     let qty_element = document.getElementById(`${id}-qty`);
+//     let dec_button = document.getElementById(`${id}-dec`);
 
-    if (id_qty[id] <= 0 && !dec_button.classList.contains('hidden')) {
-        dec_button.classList.add('hidden');
-        qty_element.innerText = "";
-    }
-    else {
-        dec_button.classList.remove('hidden');
-        qty_element.innerText = id_qty[id];
-    }
-    cekCetakRingkasan(id);
-}
+//     if (id_qty[id] <= 0 && !dec_button.classList.contains('hidden')) {
+//         dec_button.classList.add('hidden');
+//         qty_element.innerText = "";
+//     }
+//     else {
+//         dec_button.classList.remove('hidden');
+//         qty_element.innerText = id_qty[id];
+//     }
+//     cekCetakRingkasan(id);
+// }
 
 function cekCetakQtyJq(id, id_qty) {
     let qty_element = $(`#${id}-qty`);  // JANGAN LUPA kalo id itu pake #
