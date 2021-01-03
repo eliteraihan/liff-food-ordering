@@ -256,7 +256,7 @@ function konfirmasiPesanan() {
 
         liff.sendMessages([{
             'type': 'text',
-            'text': message
+            'text': `RECEIPT [${(Date.now() % 2097152).toLocaleString()}]`
         }])
             .then(function () {
                 window.alert('Resi telah dikirim.');
@@ -271,7 +271,7 @@ function konfirmasiPesanan() {
             `Item :\n` +
             `${global_nama_qty_consumable["makanan"]}\n` +
             `${global_nama_qty_consumable["minuman"]}\n\n` +
-            `Total[IDR ${global_total_harga.toLocaleString()}]`;
+            `Total [IDR ${global_total_harga.toLocaleString()}]`;
 
         window.alert(resi);
     }
