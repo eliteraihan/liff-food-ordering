@@ -29,7 +29,7 @@ body *:hover {
 
 #loggedin {
     margin: auto;
-    min-width: 80%;
+    min-width: 450px;
 }
 
 #loggedin>div>h2 {

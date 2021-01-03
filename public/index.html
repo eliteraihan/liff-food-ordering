@@ -21,57 +21,55 @@
     </header>
 
     <main>
-        <div id="loading" class="card center-block">
-            <center>
-                <h3>Initializing . . .</h3>
-                <br>
-                <p>Please wait</p>
-            </center>
-        </div>
-
         <div id="content" class="container center-block">
-            <center>
-                <div id="not-loggedin" class="card">
-                    <h4>Pengen nyemil kak? Silakan order~</h4>
-                    <p>Eits! Login dulu sebelum order ya, tinggal klik tombol di bawah ini</p>
+            <div id="loading" class="card center-block">
+                <center>
+                    <h3>Initializing . . .</h3>
+                    <br>
+                    <p>Please wait</p>
+                </center>
+            </div>
+
+            <div id="not-loggedin" class="card">
+                <h4>Pengen nyemil kak? Silakan order~</h4>
+                <p>Eits! Login dulu sebelum order ya, tinggal klik tombol di bawah ini</p>
+                <center>
+                    <button id="liff-login" type="button" class="btn btn-success">Log in</button>
+                </center>
+            </div>
+
+            <div id="loggedin" class="card">
+                <div id="opening">
+                </div>
+
+                <div id="menu-makanan" class="card">
+                </div>
+
+                <div id="menu-minuman" class="card">
+                </div>
+
+                <hr>
+
+                <div id="ringkasan-group" class="card">
+                    <div id="ringkasan">
+                    </div>
                     <center>
-                        <button id="liff-login" type="button" class="btn btn-success">Log in</button>
+                        <button id="konfirmasi-pesanan" type="button" class="btn btn-success">Konfirmasi
+                            Pesanan</button>
                     </center>
                 </div>
 
-                <div id="loggedin" class="card">
-                    <div id="opening">
-                    </div>
-
-                    <div id="menu-makanan" class="card">
-                    </div>
-
-                    <div id="menu-minuman" class="card">
-                    </div>
-
-                    <hr>
-
-                    <div class="card">
-                        <div id="ringkasan">
+                <div id="loggedin-statusMessage" class="card">
+                    <center>
+                        <div id="inApp">
+                            <a id="liff-external" href="#">Buka di external browser</a>
                         </div>
-                        <center>
-                            <button id="konfirmasi-pesanan" type="button" class="btn btn-success">Konfirmasi
-                                Pesanan</button>
-                        </center>
-                    </div>
-
-                    <div id="loggedin-statusMessage" class="card">
-                        <center>
-                            <div id="inApp">
-                                <a id="liff-external" href="#">Buka di external browser</a>
-                            </div>
-                            <div id="notInApp">
-                                <a id="liff-logout" href="#">Log out</a>
-                            </div>
-                        </center>
-                    </div>
+                        <div id="notInApp">
+                            <a id="liff-logout" href="#">Log out</a>
+                        </div>
+                    </center>
                 </div>
-            </center>
+            </div>
         </div>
     </main>
 

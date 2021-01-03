@@ -73,7 +73,7 @@ function initializeApp() {
     try {
         console.log("initializeApp() ...");
         $('#loading').show();
-        $('#content').hide();
+        // $('#content').hide();
 
         if (liff.isLoggedIn()) {
             console.log("initialize loggedin ...");
@@ -81,17 +81,19 @@ function initializeApp() {
             showLoggedinElements();
             initializeLoggedinElements();
             registerLoggedinEventListeners();
+            $('#ringkasan-group').hide();
             $('#not-loggedin').hide();
             console.log("loggedin initialized");
         } else {
             console.log("initialize not-loggedin ...")
-            // kalo belom login, munculin tombol login aja
+            $('#loggedin').hide();
             $('#liff-logout').hide();
+            // kalo belom login, munculin tombol login aja
             $('#not-loggedin').show();
             registerLoggedoutEventListeners();
             console.log("not-loggedin initialized");
         }
-        $('#content').show();
+        // $('#content').show();
         $('#loading').hide();
 
         // baru hide semua
