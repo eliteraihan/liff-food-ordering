@@ -188,7 +188,7 @@ function isNonZero(kv) {
 }
 
 function cekCetakRingkasan(id) {
-    let ringkasan_string = ``;
+    let ringkasan_html = ``;
     let nama_qty_consumable = "";
     let total_harga = 0;
 
