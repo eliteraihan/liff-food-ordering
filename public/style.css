@@ -41,6 +41,10 @@ body *:hover {
     padding-bottom: 10pt;
 }
 
+#ringkasan-group h4 {
+    text-align: center;
+}
+
 table {
     width: 100%;
     overflow-x: auto;
