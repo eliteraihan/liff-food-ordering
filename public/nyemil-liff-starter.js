@@ -208,8 +208,10 @@ function registerLoggedinEventListeners() {
 
     document.getElementById('konfirmasi-pesanan').addEventListener('click', function () {
         console.log("click: #konfirmasi-pesanan");
+        if (liff.isInClient()) {
+            lockoutElement(`#konfirmasi-pesanan`);;
+        }
         konfirmasiPesanan();
-        lockoutElement(`#konfirmasi-pesanan`);
     });
     console.log("#konfirmasi-pesanan");
     console.log("registerEventListeners() done");
@@ -245,10 +247,10 @@ function konfirmasiPesanan() {
     global_nama_qty_consumable["makanan"] = prosesItemHtmlToPlain("makanan");
     global_nama_qty_consumable["minuman"] = prosesItemHtmlToPlain("minuman");
     let numbers = [
-        getRandomArbitrary(10, 100),
-        getRandomInt(100, 999),
-        getRandomInt(100, 999),
-        getRandomArbitrary(10, 100),
+        getRandomInt(10, 99),
+        getRandomInt(1000, 9999),
+        getRandomInt(1000, 9999),
+        getRandomInt(10, 99),
     ]; // .toLocaleString()
     let receipt_string = `[${numbers[0]}-${numbers[1]}-${numbers[2]}-${numbers[3]}]`;
 
